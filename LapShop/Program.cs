@@ -1,3 +1,6 @@
+using LapShop.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace LapShop
 {
     public class Program
@@ -8,6 +11,10 @@ namespace LapShop
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<MainContext>(Options =>
+            {
+                Options.UseSqlServer(builder.Configuration.GetConnectionString("cs"));
+            });
 
             var app = builder.Build();
 
