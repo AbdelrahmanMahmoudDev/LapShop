@@ -29,5 +29,7 @@
         public List<CustomerxItem> CustomerxItems { get; set; }
         public List<ItemDiscount> ItemDiscounts { get; set; }
         public List<ItemImage> ItemImages { get; set; }
+        public List<PurchaseInvoicexItem> PurchaseInvoicexItems { get; set; }
+        public List<SalesInvoicexItem> SalesInvoicexItems { get; set; }
     }
 }

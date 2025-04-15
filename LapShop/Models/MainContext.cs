@@ -14,6 +14,13 @@ namespace LapShop.Models
         public virtual DbSet<CustomerxItem> CustomerxItems { get; set; }
         public virtual DbSet<ItemDiscount> ItemDiscounts { get; set; }
         public virtual DbSet<ItemImage> ItemImages { get; set; }
+        public virtual DbSet<Supplier> Suppliers { get; set; }
+        public virtual DbSet<PurchaseInvoice> PurchaseInvoices { get; set; }
+        public virtual DbSet<PurchaseInvoicexItem> PurchaseInvoicexItems { get; set; }
+        public virtual DbSet<DeliveryMan> DeliveryMen { get; set; }
+        public virtual DbSet<SalesInvoice> SalesInvoices { get; set; }
+        public virtual DbSet<SalesInvoicexItem> SalesInvoicexItems { get; set; }
+        public virtual DbSet<Slider> Sliders { get; set; }
         public MainContext() : base() { }
         public MainContext(DbContextOptions Options) : base(Options) { }
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
@@ -30,6 +37,9 @@ namespace LapShop.Models
             modelBuilder.Entity<Category>(e => e.HasKey(a => a.CategoryId));
             modelBuilder.Entity<ItemType>(e => e.HasKey(a => a.ItemTypeId));
             modelBuilder.Entity<OperatingSystem>(e => e.HasKey(a => a.OperatingSystemId));
+            modelBuilder.Entity<Supplier>(e => e.HasKey(a => a.SupplierId));
+            modelBuilder.Entity<Slider>(e => e.HasKey(a => a.SliderId));
+            modelBuilder.Entity<DeliveryMan>(e => e.HasKey(a => a.DeliveryManId));
 
             modelBuilder.Entity<BusinessInfo>(e =>
             {
@@ -95,6 +105,54 @@ namespace LapShop.Models
 
                 e.HasOne(a => a.Item)
                  .WithMany(a => a.ItemImages)
+                 .HasForeignKey(a => a.ItemId);
+            });
+
+            modelBuilder.Entity<PurchaseInvoice>(e =>
+            {
+                e.HasKey(a => a.PurchaseInvoiceId);
+
+                e.HasOne(a => a.Supplier)
+                 .WithMany(a => a.PurchaseInvoices)
+                 .HasForeignKey(a => a.SupplierId);
+            });
+
+            modelBuilder.Entity<PurchaseInvoicexItem>(e =>
+            {
+                e.HasKey(a => a.PurchaseInvoicexItemId);
+
+                e.HasOne(a => a.PurchaseInvoice)
+                 .WithMany(a => a.PurchaseInvoicexItems)
+                 .HasForeignKey(a => a.PurchaseInvoiceId);
+
+                e.HasOne(a => a.Item)
+                 .WithMany(a => a.PurchaseInvoicexItems)
+                 .HasForeignKey(a => a.ItemId);
+            });
+
+            modelBuilder.Entity<SalesInvoice>(e =>
+            {
+                e.HasKey(a => a.SalesInvoiceId);
+
+                e.HasOne(a => a.DeliveryMan)
+                 .WithMany(a => a.SalesInvoices)
+                 .HasForeignKey(a => a.DeliveryManId);
+
+                e.HasOne(a => a.Customer)
+                 .WithMany(a => a.SalesInvoices)
+                 .HasForeignKey(a => a.CustomerId);
+            });
+
+            modelBuilder.Entity<SalesInvoicexItem>(e =>
+            {
+                e.HasKey(a => a.SalesInvoicexItemId);
+
+                e.HasOne(a => a.SalesInvoice)
+                 .WithMany(a => a.SalesInvoicexItems)
+                 .HasForeignKey(a => a.SalesInvoiceId);
+
+                e.HasOne(a => a.Item)
+                 .WithMany(a => a.SalesInvoicexItems)
                  .HasForeignKey(a => a.ItemId);
             });
         }
