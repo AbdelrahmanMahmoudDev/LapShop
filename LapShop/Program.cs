@@ -1,4 +1,6 @@
+using LapShop.BL;
 using LapShop.Models;
+using LapShop.Models.Repositories.Base;
 using Microsoft.EntityFrameworkCore;
 
 namespace LapShop
@@ -15,6 +17,9 @@ namespace LapShop
             {
                 Options.UseSqlServer(builder.Configuration.GetConnectionString("cs"));
             });
+
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
 
             var app = builder.Build();
 

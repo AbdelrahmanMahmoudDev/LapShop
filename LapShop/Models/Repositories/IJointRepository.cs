@@ -12,6 +12,5 @@
         public ValueTask Update(Type obj);
         public ValueTask Delete(Type obj);
         public ValueTask DeleteRange(IEnumerable<Type> obj);
-        public ValueTask UploadToDatabase();
     }
 }
