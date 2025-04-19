@@ -1,7 +1,6 @@
 (function($) {
   'use strict';
   $(function() {
-    Chart.defaults.global.legend.labels.usePointStyle = true;
     
     if ($("#serviceSaleProgress").length) {
       var bar = new ProgressBar.Circle(serviceSaleProgress, {
@@ -196,7 +195,6 @@
             })
     }
     if ($("#visit-sale-chart").length) {
-      Chart.defaults.global.legend.labels.usePointStyle = true;
       var ctx = document.getElementById('visit-sale-chart').getContext("2d");
 
       var gradientStrokeViolet = ctx.createLinearGradient(0, 0, 0, 181);
@@ -214,105 +212,6 @@
       gradientStrokeRed.addColorStop(1, 'rgba(254, 112, 150, 1)');
       var gradientLegendRed = 'linear-gradient(to right, rgba(255, 191, 150, 1), rgba(254, 112, 150, 1))';
 
-      var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG'],
-            datasets: [
-              {
-                label: "CHN",
-                borderColor: gradientStrokeViolet,
-                backgroundColor: gradientStrokeViolet,
-                hoverBackgroundColor: gradientStrokeViolet,
-                legendColor: gradientLegendViolet,
-                pointRadius: 0,
-                fill: false,
-                borderWidth: 1,
-                fill: 'origin',
-                data: [20, 40, 15, 35, 25, 50, 30, 20]
-              },
-              {
-                label: "USA",
-                borderColor: gradientStrokeRed,
-                backgroundColor: gradientStrokeRed,
-                hoverBackgroundColor: gradientStrokeRed,
-                legendColor: gradientLegendRed,
-                pointRadius: 0,
-                fill: false,
-                borderWidth: 1,
-                fill: 'origin',
-                data: [40, 30, 20, 10, 50, 15, 35, 40]
-              },
-              {
-                label: "UK",
-                borderColor: gradientStrokeBlue,
-                backgroundColor: gradientStrokeBlue,
-                hoverBackgroundColor: gradientStrokeBlue,
-                legendColor: gradientLegendBlue,
-                pointRadius: 0,
-                fill: false,
-                borderWidth: 1,
-                fill: 'origin',
-                data: [70, 10, 30, 40, 25, 50, 15, 30]
-              }
-          ]
-        },
-        options: {
-          responsive: true,
-          legend: false,
-          legendCallback: function(chart) {
-            var text = []; 
-            text.push('<ul>'); 
-            for (var i = 0; i < chart.data.datasets.length; i++) { 
-                text.push('<li><span class="legend-dots" style="background:' + 
-                           chart.data.datasets[i].legendColor + 
-                           '"></span>'); 
-                if (chart.data.datasets[i].label) { 
-                    text.push(chart.data.datasets[i].label); 
-                } 
-                text.push('</li>'); 
-            } 
-            text.push('</ul>'); 
-            return text.join('');
-          },
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      display: false,
-                      min: 0,
-                      stepSize: 20,
-                      max: 80
-                  },
-                  gridLines: {
-                    drawBorder: false,
-                    color: 'rgba(235,237,242,1)',
-                    zeroLineColor: 'rgba(235,237,242,1)'
-                  }
-              }],
-              xAxes: [{
-                  gridLines: {
-                    display:false,
-                    drawBorder: false,
-                    color: 'rgba(0,0,0,1)',
-                    zeroLineColor: 'rgba(235,237,242,1)'
-                  },
-                  ticks: {
-                      padding: 20,
-                      fontColor: "#9c9fa6",
-                      autoSkip: true,
-                  },
-                  categoryPercentage: 0.5,
-                  barPercentage: 0.5
-              }]
-            }
-          },
-          elements: {
-            point: {
-              radius: 0
-            }
-          }
-      })
-      $("#visit-sale-chart-legend").html(myChart.generateLegend());
     }
     if ($("#visit-sale-chart-dark").length) {
       Chart.defaults.global.legend.labels.usePointStyle = true;
@@ -505,13 +404,6 @@
           return text.join('');
         }
       };
-      var trafficChartCanvas = $("#traffic-chart").get(0).getContext("2d");
-      var trafficChart = new Chart(trafficChartCanvas, {
-        type: 'doughnut',
-        data: trafficChartData,
-        options: trafficChartOptions
-      });
-      $("#traffic-chart-legend").html(trafficChart.generateLegend());      
     }
     if ($("#inline-datepicker").length) {
       $('#inline-datepicker').datepicker({
@@ -520,34 +412,6 @@
       });
     }
   });
-  if ($.cookie('purple-pro-banner')!="true") {
-    document.querySelector('#proBanner').classList.add('d-flex');
-    document.querySelector('.navbar').classList.remove('fixed-top');
-  }
-  else {
-    document.querySelector('#proBanner').classList.add('d-none');
-    document.querySelector('.navbar').classList.add('fixed-top');
-  }
   
-  if ($( ".navbar" ).hasClass( "fixed-top" )) {
-    document.querySelector('.page-body-wrapper').classList.remove('pt-0');
-    document.querySelector('.navbar').classList.remove('pt-5');
-  }
-  else {
-    document.querySelector('.page-body-wrapper').classList.add('pt-0');
-    document.querySelector('.navbar').classList.add('pt-5');
-    document.querySelector('.navbar').classList.add('mt-3');
-    
-  }
-  document.querySelector('#bannerClose').addEventListener('click',function() {
-    document.querySelector('#proBanner').classList.add('d-none');
-    document.querySelector('#proBanner').classList.remove('d-flex');
-    document.querySelector('.navbar').classList.remove('pt-5');
-    document.querySelector('.navbar').classList.add('fixed-top');
-    document.querySelector('.page-body-wrapper').classList.add('proBanner-padding-top');
-    document.querySelector('.navbar').classList.remove('mt-3');
-    var date = new Date();
-    date.setTime(date.getTime() + 24 * 60 * 60 * 1000); 
-    $.cookie('purple-pro-banner', "true", { expires: date });
-  });
+  
 })(jQuery);
