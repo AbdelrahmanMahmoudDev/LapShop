@@ -82,5 +82,86 @@ namespace LapShop.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(Act);
         }
+
+        [Fact]
+        public async Task GetBySubString_SubStringIsNull_ThrowsInvalidOperationException()
+        {
+            // Arrange
+            string SubStr = null;
+
+            // Act
+            async Task Act() => await _Repository.GetBySubString(SubStr);
+
+            // Assert
+            await Assert.ThrowsAsync<InvalidOperationException>(Act);
+        }
+
+        [Fact]
+        public async Task GetBySubString_SubStringIsWhitespace_ThrowsIinvalidOperationException()
+        {
+            // Arrange
+            string SubStr = " ";
+
+            // Act
+            async Task Act() => await _Repository.GetBySubString(SubStr);
+
+            // Assert
+            await Assert.ThrowsAsync<InvalidOperationException>(Act);
+        }
+
+        [Fact]
+        public async Task GetBySubstring_SubStringIsNullAndNavPropsIsNull_ThrowsInvalidOperationException()
+        {
+            // Arrange
+            string Substr = null;
+            List<string> NavProps = null;
+
+            // Act
+            async Task Act() => await _Repository.GetBySubString(Substr, NavProps);
+
+            // Assert
+            await Assert.ThrowsAsync<InvalidOperationException>(Act);
+        }
+
+        [Fact]
+        public async Task GetBySubstring_SubStringIsNullAndNavPropsIsValid_ThrowsInvalidOperationException()
+        {
+            // Arrange
+            string Substr = null;
+            List<string> NavProps = [""];
+
+            // Act
+            async Task Act() => await _Repository.GetBySubString(Substr, NavProps);
+
+            // Assert
+            await Assert.ThrowsAsync<InvalidOperationException>(Act);
+        }
+
+        [Fact]
+        public async Task GetBySubstring_SubStringIsWhiteSpaceAndNavPropsIsNull_ThrowsInvalidOperationException()
+        {
+            // Arrange
+            string Substr = "";
+            List<string> NavProps = null;
+
+            // Act
+            async Task Act() => await _Repository.GetBySubString(Substr, NavProps);
+
+            // Assert
+            await Assert.ThrowsAsync<InvalidOperationException>(Act);
+        }
+
+        [Fact]
+        public async Task Update_ObjIsNull_ThrowsArgumentNullException()
+        {
+            // Arrange
+            Category Obj = null;
+
+            // Act
+            async Task Act() => await _Repository.Update(Obj);
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(Act);
+        }
     }
 }

@@ -138,7 +138,7 @@ namespace LapShop.Models.Repositories
         {
             if (string.IsNullOrWhiteSpace(SubString))
             {
-                throw new ArgumentNullException("Substring cannot be null or empty.", nameof(SubString));
+                throw new InvalidOperationException("Substring cannot be null or empty.");
             }
 
             try
@@ -157,8 +157,9 @@ namespace LapShop.Models.Repositories
         {
             if(string.IsNullOrWhiteSpace(SubString))
             {
-                throw new ArgumentNullException("Substring cannot be null or empty.", nameof(SubString));
+                throw new InvalidOperationException("Substring cannot be null or empty.");
             }
+
             if (NavProps == null)
             {
                 throw new ArgumentNullException(nameof(NavProps));
