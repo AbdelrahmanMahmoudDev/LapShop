@@ -3,6 +3,7 @@
     public interface IRepository<Type>
     {
         public Task<bool> Create(Type obj);
+        // returns a null object of Type if non-existant
         public Task<Type> GetById(int id);
         public Task<Type> GetById(int id, List<string> NavProps);
         public Task<IEnumerable<Type>> GetBySubString(string SubString);

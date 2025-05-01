@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Category>
+
+@section Styles
+{
+	<!-- Plugin css for this page -->
+	<link rel="stylesheet" href="~/admin/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+}
+
+<div class="container-fluid page-body-wrapper">
+	<div class="main-panel">
+		<div class="content-wrapper">
+			<div class="page-header">
+				<h3 class="page-title"> Categories </h3>
+			</div>
+			<div class="card">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-4 m-4">
+							<a asp-area="Admin" asp-controller="Category" asp-action="Edit" class="btn btn-inverse-success btn-fw">New</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div id="order-listing_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+								<div class="row">
+									<div class="col-sm-12">
+										<table id="order-listing" class="table dataTable no-footer" aria-describedby="order-listing_info">
+											<thead>
+												<tr>
+													<th class="sorting sorting_asc" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Order #: activate to sort column descending" style="width: 107.05px;">ID</th>
+													<th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" aria-label="Purchased On: activate to sort column ascending" style="width: 171.012px;">Name</th>
+													<th></th>
+													<th></th>
+												</tr>
+											</thead>
+											<tbody>
+												@foreach (Category Element in Model)
+												{
+													<tr class="odd">
+														<td class="sorting_1"> @Element.CategoryId </td>
+														<td> @Element.CategoryName </td>
+														<td>
+															<a asp-area="Admin" asp-controller="Category" asp-action="Edit" asp-route-id="@Element.CategoryId" class="btn btn-inverse-warning btn-fw">Edit</a>
+														</td>
+														<td>
+															<a asp-area="Admin" asp-controller="Category" asp-action="Delete" asp-route-id="@Element.CategoryId" class="btn btn-inverse-danger btn-fw">Delete</a>
+														</td>
+													</tr>
+												}
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- content-wrapper ends -->
+	</div>
+	<!-- main-panel ends -->
+</div>
+
+@section Scripts
+{
+	<!-- Plugin js for this page -->
+	<script src="~/admin/assets/vendors/datatables.net/jquery.dataTables.js"></script>
+	<script src="~/admin/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+
+	<!-- Custom js for this page -->
+	<script src="~/admin/assets/js/data-table.js"></script>
+}

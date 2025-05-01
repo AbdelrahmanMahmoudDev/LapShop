@@ -17,5 +17,10 @@ namespace LapShop.Models.Repositories.Base
         {
             return await _Context.Database.BeginTransactionAsync();
         }
+
+        public MainContext GetContext()
+        {
+            return _Context;
+        }
     }
 }

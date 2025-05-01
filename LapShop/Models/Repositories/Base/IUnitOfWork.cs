@@ -8,5 +8,7 @@ namespace LapShop.Models.Repositories.Base
         IRepository<Category> Categories { get;  }
 
         ValueTask<IDbContextTransaction> BeginTransaction();
+
+        MainContext GetContext();
     }
 }
