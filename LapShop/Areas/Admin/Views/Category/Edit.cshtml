@@ -27,16 +27,16 @@
 									<input asp-for="@Model.ShowInHomePage" checked="@Model.ShowInHomePage" />
 								</div>
 
-								@* <div class="form-group"> *@
-								@* 	<label>File upload</label> *@
-								@* 	<input type="file" name="img[]" class="file-upload-default"> *@
-								@* 	<div class="input-group col-xs-12"> *@
-								@* 		<input type="text" class="form-control file-upload-info" disabled="" placeholder="Upload Image" asp-for="@Model.ImageName"> *@
-								@* 		<span class="input-group-append"> *@
-								@* 			<button class="file-upload-browse btn btn-gradient-primary" type="button">Upload</button> *@
-								@* 		</span> *@
-								@* 	</div> *@
-								@* </div> *@
+								<div class="form-group">
+									<label>File upload</label>
+									<input asp-for="@Model.ImageName" type="file" name="File" class="file-upload-default" onchange="Upload.UploadDefaultImg(event)" accept=".jpg, .jpeg, .png, ,.gif">
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control file-upload-info" disabled="" placeholder="UploadImage" asp-for="@Model.ImageName" >
+										<span class="input-group-append">
+											<button class="file-upload-browse btn btn-gradient-primary" type="button">Upload</button>
+										</span>
+									</div>
+								</div>
 								<button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
 								<a asp-area="Admin" asp-controller="Category" asp-action="Index" class="btn btn-light">Cancel</a>
 							</form>
@@ -44,10 +44,13 @@
 					</div>
 				</div>
 
-				<div class="col-6 grid-margin stretch-card">
+				<div class="col-md-4 grid-margin stretch-card">
 					<div class="card">
 						<div class="card-body">
-							<img src="@Model.ImageName" style="width: 300px; border: 2px solid red;" />
+							<span id="tbImgName"></span>
+							<div id="tbImgSrc">
+								<img src="/Uploads/Categories/@Model.ImageName" style="width:95%; height:300px;" />
+							</div>
 						</div>
 					</div>
 				</div>
@@ -59,4 +62,20 @@
 @section Scripts
 {
 	<script src="~/admin/assets/js/file-upload.js"></script>
+
+	<script>
+		var Upload = {
+				UploadDefaultImg: function(e) {
+				const file = e.target.files[0];
+				const reader = new FileReader();
+				reader.onloadend = () => {
+					CourseMediaImgName = file.name;
+					CourseMediaImgBase64 = reader.result.slice(reader.result.indexOf('base64,') + 7);
+					$("#tbImgName").html(file.name)
+					$("#tbImgSrc").html(`<img class="thumbnail" src = "${reader.result}"  style = "width: 200px;height: 300px;border-radius: 5px;border: 1px solid #d9d9d9;padding: 1px;" />`)
+				};
+				reader.readAsDataURL(file);
+			}
+		}
+	</script>
 }

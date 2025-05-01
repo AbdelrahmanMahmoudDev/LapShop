@@ -1,6 +1,7 @@
 using LapShop.BL;
 using LapShop.Models;
 using LapShop.Models.Repositories.Base;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 
 namespace LapShop
@@ -22,7 +23,7 @@ namespace LapShop
             builder.Services.AddScoped<ICategoryService, CategoryService>();
 
             var app = builder.Build();
-
+            Utilities.FileUtility.WebRootPath = app.Environment.WebRootPath;
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {

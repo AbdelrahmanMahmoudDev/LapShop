@@ -30,16 +30,16 @@ namespace LapShop.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Save(Models.Category Category)
+        public async Task<IActionResult> Save(Models.Category Category, IFormFile File)
         {
             bool IsSuccess = false;
             if (Category.CategoryId == 0)
             {
-                IsSuccess = await _CategoryService.SaveNew(Category);
+                IsSuccess = await _CategoryService.SaveNew(Category, File);
             }
             else
             {
-                IsSuccess = await _CategoryService.SaveUpdate(Category);
+                IsSuccess = await _CategoryService.SaveUpdate(Category, File);
             }
 
             if (!IsSuccess)

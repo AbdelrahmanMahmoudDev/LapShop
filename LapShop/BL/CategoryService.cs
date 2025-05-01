@@ -22,13 +22,13 @@ namespace LapShop.BL
             return await _UnitOfWork.Categories.GetById(id);
         }
 
-        public async Task<bool> SaveNew(Category Category)
+        public async Task<bool> SaveNew(Category Category, IFormFile File)
         {
             try
             {
                 Category.CategoryBy = "1";
                 Category.CreatedDate = DateTime.Now;
-                Category.ImageName = "";
+                Category.ImageName = await Utilities.FileUtility.SaveFile(File, "Images\\Categories", [".jpg", ".jpeg", ".png"]);
                 await _UnitOfWork.Categories.Create(Category);
                 return true;
             }
@@ -37,13 +37,13 @@ namespace LapShop.BL
                 return false;
             }
         }
-        public async Task<bool> SaveUpdate(Category Category)
+        public async Task<bool> SaveUpdate(Category Category, IFormFile File)
         {
             try
             {
                 Category.UpdatedBy = "1";
                 Category.UpdatedDate = DateTime.Now;
-                Category.ImageName = "";
+                Category.ImageName = await Utilities.FileUtility.SaveFile(File, "Images\\Categories", [".jpg", ".jpeg", ".png"]);
                 _UnitOfWork.GetContext().Entry(Category).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 await _UnitOfWork.GetContext().SaveChangesAsync();
                 return true;
@@ -62,6 +62,7 @@ namespace LapShop.BL
 
                 if(TargetCategory is not null)
                 {
+                    Utilities.FileUtility.DeleteFile(TargetCategory.ImageName);
                     if(! await _UnitOfWork.Categories.Delete(TargetCategory))
                     {
                         // failed to delete in database
