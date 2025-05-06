@@ -23,6 +23,12 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LapShop.Data\LapShop.Data.csproj" />
+    <ProjectReference Include="..\LapShop.Services\LapShop.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,7 +1,5 @@
-using LapShop.BL;
-using LapShop.Models;
-using LapShop.Models.Repositories.Base;
-using Microsoft.AspNetCore.Http.Features;
+using LapShop.Services.Category;
+using LapShop.Data.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace LapShop
@@ -14,7 +12,7 @@ namespace LapShop
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddDbContext<MainContext>(Options =>
+            builder.Services.AddDbContext<LapShop.Data.MainContext>(Options =>
             {
                 Options.UseSqlServer(builder.Configuration.GetConnectionString("cs"));
             });

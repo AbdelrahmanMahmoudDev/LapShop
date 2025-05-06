@@ -1,4 +1,5 @@
-﻿using LapShop.BL;
+﻿using LapShop.Services.Category;
+using LapShop.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LapShop.Areas.Admin.Controllers
@@ -18,7 +19,7 @@ namespace LapShop.Areas.Admin.Controllers
 
         public async Task<IActionResult> Category()
         {
-            IEnumerable<Models.Category> Categories = await _CategoryService.PrepareDashboard();
+            IEnumerable<Category> Categories = await _CategoryService.PrepareDashboard();
             return View("Category", Categories);
         }
     }

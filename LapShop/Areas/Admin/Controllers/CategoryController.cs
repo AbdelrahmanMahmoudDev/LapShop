@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using LapShop.BL;
+﻿using LapShop.Services.Category;
+using LapShop.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LapShop.Areas.Admin.Controllers
@@ -15,7 +15,7 @@ namespace LapShop.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
-            IEnumerable<Models.Category> Categories = await _CategoryService.PrepareDashboard();
+            IEnumerable<Category> Categories = await _CategoryService.PrepareDashboard();
             return View("Index", Categories);
         }
 
@@ -25,21 +25,27 @@ namespace LapShop.Areas.Admin.Controllers
             {
                 return View("Edit", await _CategoryService.GetTargetCategory(Convert.ToInt32(Id)));
             }
-            return View("Edit", new Models.Category());
+            return View("Edit", new Category());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Save(Models.Category Category, IFormFile File)
+        public async Task<IActionResult> Save(Category Category, IFormFile File)
         {
             bool IsSuccess = false;
             if (Category.CategoryId == 0)
             {
-                IsSuccess = await _CategoryService.SaveNew(Category, File);
+                Category.ImageName = await Utilities.FileUtility.SaveFile(File, "Images\\Categories", [".jpg", ".jpeg", ".png"]);
+                IsSuccess = await _CategoryService.SaveNew(Category);
             }
             else
             {
-                IsSuccess = await _CategoryService.SaveUpdate(Category, File);
+                // Category Updates may not update images
+                if (File is not null)
+                {
+                    Category.ImageName = await Utilities.FileUtility.SaveFile(File, "Images\\Categories", [".jpg", ".jpeg", ".png"]);
+                }
+                IsSuccess = await _CategoryService.SaveUpdate(Category);
             }
 
             if (!IsSuccess)
@@ -51,11 +57,15 @@ namespace LapShop.Areas.Admin.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            bool IsSuccess = await _CategoryService.RemoveCategory(id);
+            string ImagePath = await _CategoryService.RemoveCategory(id);
 
-            if (!IsSuccess)
+            if (ImagePath is null)
             {
                 return StatusCode(500, "A server side error occured while processing your request");
+            }
+            else
+            {
+                Utilities.FileUtility.DeleteFile(ImagePath);
             }
             return RedirectToAction("Index");
         }
