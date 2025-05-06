@@ -10,13 +10,13 @@
 	<div class="main-panel">
 		<div class="content-wrapper">
 			<div class="page-header">
-				<h3 class="page-title"> Categories </h3>
+				<h3 class="page-title">@ResAdmin.LblCategories</h3>
 			</div>
 			<div class="card">
 				<div class="card-body">
 					<div class="row">
 						<div class="col-4 m-4">
-							<a asp-area="Admin" asp-controller="Category" asp-action="Edit" class="btn btn-inverse-success btn-fw">New</a>
+							<a asp-area="Admin" asp-controller="Category" asp-action="Edit" class="btn btn-inverse-success btn-fw">@ResAdmin.LblNew</a>
 						</div>
 					</div>
 					<div class="row">
@@ -27,8 +27,8 @@
 										<table id="order-listing" class="table dataTable no-footer" aria-describedby="order-listing_info">
 											<thead>
 												<tr>
-													<th class="sorting sorting_asc" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Order #: activate to sort column descending" style="width: 107.05px;">ID</th>
-													<th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" aria-label="Purchased On: activate to sort column ascending" style="width: 171.012px;">Name</th>
+													<th class="sorting sorting_asc" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Order #: activate to sort column descending" style="width: 107.05px;">@ResAdmin.LblId</th>
+													<th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" aria-label="Purchased On: activate to sort column ascending" style="width: 171.012px;">@ResAdmin.LblName</th>
 													<th></th>
 													<th></th>
 												</tr>
@@ -40,10 +40,10 @@
 														<td class="sorting_1"> @Element.CategoryId </td>
 														<td> @Element.CategoryName </td>
 														<td>
-															<a asp-area="Admin" asp-controller="Category" asp-action="Edit" asp-route-id="@Element.CategoryId" class="btn btn-inverse-warning btn-fw">Edit</a>
+															<a asp-area="Admin" asp-controller="Category" asp-action="Edit" asp-route-id="@Element.CategoryId" class="btn btn-inverse-warning btn-fw">@ResAdmin.LblEdit</a>
 														</td>
 														<td>
-															<a asp-area="Admin" asp-controller="Category" asp-action="Delete" asp-route-id="@Element.CategoryId" class="btn btn-inverse-danger btn-fw">Delete</a>
+															<a asp-area="Admin" asp-controller="Category" asp-action="Delete" asp-route-id="@Element.CategoryId" class="btn btn-inverse-danger btn-fw">@ResAdmin.LblDelete</a>
 														</td>
 													</tr>
 												}
