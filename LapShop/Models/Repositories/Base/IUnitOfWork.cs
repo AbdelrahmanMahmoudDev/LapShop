@@ -3,12 +3,10 @@ using Models.Repositories;
 
 namespace LapShop.Models.Repositories.Base
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
-        IRepository<Category> Categories { get;  }
-
+        IRepository<Category> Categories { get; }
         ValueTask<IDbContextTransaction> BeginTransaction();
-
-        MainContext GetContext();
+        Task<int> CompleteAsync();
     }
 }

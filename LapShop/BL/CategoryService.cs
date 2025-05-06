@@ -12,15 +12,9 @@ namespace LapShop.BL
             _UnitOfWork = UnitOfWork;
         }
 
-        public async Task<IEnumerable<Category>> PrepareDashboard()
-        {
-            return await _UnitOfWork.Categories.GetAll();
-        }
+        public async Task<IEnumerable<Category>> PrepareDashboard() => await _UnitOfWork.Categories.GetAllAsync();
 
-        public async Task<Category> GetTargetCategory(int id)
-        {
-            return await _UnitOfWork.Categories.GetById(id);
-        }
+        public async Task<Category> GetTargetCategory(int id) => await _UnitOfWork.Categories.GetByIdAsync(id);
 
         public async Task<bool> SaveNew(Category Category, IFormFile File)
         {
@@ -29,7 +23,8 @@ namespace LapShop.BL
                 Category.CategoryBy = "1";
                 Category.CreatedDate = DateTime.Now;
                 Category.ImageName = await Utilities.FileUtility.SaveFile(File, "Images\\Categories", [".jpg", ".jpeg", ".png"]);
-                await _UnitOfWork.Categories.Create(Category);
+                await _UnitOfWork.Categories.AddAsync(Category);
+                await _UnitOfWork.CompleteAsync();
                 return true;
             }
             catch
@@ -43,9 +38,14 @@ namespace LapShop.BL
             {
                 Category.UpdatedBy = "1";
                 Category.UpdatedDate = DateTime.Now;
-                Category.ImageName = await Utilities.FileUtility.SaveFile(File, "Images\\Categories", [".jpg", ".jpeg", ".png"]);
-                _UnitOfWork.GetContext().Entry(Category).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                await _UnitOfWork.GetContext().SaveChangesAsync();
+
+                // Category Updates may not update images
+                if (File is not null)
+                {
+                    Category.ImageName = await Utilities.FileUtility.SaveFile(File, "Images\\Categories", [".jpg", ".jpeg", ".png"]);
+                }
+                _UnitOfWork.Categories.Update(Category);
+                await _UnitOfWork.CompleteAsync();
                 return true;
             }
             catch
@@ -58,16 +58,17 @@ namespace LapShop.BL
         {
             try
             {
-                Category TargetCategory = await _UnitOfWork.Categories.GetById(id);
+                Category TargetCategory = await _UnitOfWork.Categories.GetByIdAsync(id);
 
-                if(TargetCategory is not null)
+                if (TargetCategory is not null)
                 {
                     Utilities.FileUtility.DeleteFile(TargetCategory.ImageName);
-                    if(! await _UnitOfWork.Categories.Delete(TargetCategory))
+                    if (!_UnitOfWork.Categories.Delete(TargetCategory))
                     {
                         // failed to delete in database
                         // log database error
                     }
+                    await _UnitOfWork.CompleteAsync();
                     return true;
                 }
                 // we somehow passed an invalid id

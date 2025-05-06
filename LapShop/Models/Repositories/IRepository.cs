@@ -1,16 +1,12 @@
 ﻿namespace Models.Repositories
 {
-    public interface IRepository<Type>
+    public interface IRepository<Type> where Type : class
     {
-        public Task<bool> Create(Type obj);
         // returns a null object of Type if non-existant
-        public Task<Type> GetById(int id);
-        public Task<Type> GetById(int id, List<string> NavProps);
-        public Task<IEnumerable<Type>> GetBySubString(string SubString);
-        public Task<IEnumerable<Type>> GetBySubString(string SubString, List<string> NavProps);
-        public Task<IEnumerable<Type>> GetAll();
-        public Task<IEnumerable<Type>> GetAll(List<string> NavProps);
-        public Task<bool> Update(Type obj);
-        public Task<bool> Delete(Type obj);
+        public Task<Type> GetByIdAsync(int Id);
+        public Task<IEnumerable<Type>> GetAllAsync();
+        public Task<bool> AddAsync(Type Entity);
+        public bool Update(Type Entity);
+        public bool Delete(Type Entity);
     }
 }
