@@ -35,12 +35,36 @@ namespace LapShop.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Customer>(e => e.HasKey(a => a.CustomerId));
-            modelBuilder.Entity<Category>(e => e.HasKey(a => a.CategoryId));
-            modelBuilder.Entity<ItemType>(e => e.HasKey(a => a.ItemTypeId));
-            modelBuilder.Entity<LapShop.Data.Models.OperatingSystem>(e => e.HasKey(a => a.OperatingSystemId));
             modelBuilder.Entity<Supplier>(e => e.HasKey(a => a.SupplierId));
             modelBuilder.Entity<Slider>(e => e.HasKey(a => a.SliderId));
             modelBuilder.Entity<DeliveryMan>(e => e.HasKey(a => a.DeliveryManId));
+
+            modelBuilder.Entity<Category>(e =>
+            {
+                e.HasKey(a => a.CategoryId);
+                e.Property(p => p.CreatedDate)
+                 .HasColumnType("datetime2");
+                e.Property(p => p.UpdatedDate)
+                 .HasColumnType("datetime2");
+            });
+
+            modelBuilder.Entity<ItemType>(e =>
+            {
+                e.HasKey(a => a.ItemTypeId);
+                e.Property(p => p.CreatedDate)
+                 .HasColumnType("datetime2");
+                e.Property(p => p.UpdatedDate)
+                 .HasColumnType("datetime2");
+            });
+
+            modelBuilder.Entity<Models.OperatingSystem>(e =>
+            {
+                e.HasKey(a => a.OperatingSystemId);
+                e.Property(p => p.CreatedDate)
+                 .HasColumnType("datetime2");
+                e.Property(p => p.UpdatedDate)
+                 .HasColumnType("datetime2");
+            });
 
             modelBuilder.Entity<BusinessInfo>(e =>
             {
@@ -76,6 +100,11 @@ namespace LapShop.Data
                 e.HasOne(a => a.OperatingSystem)
                  .WithMany(a => a.Items)
                  .HasForeignKey(a => a.OperatingSystemId);
+
+                e.Property(p => p.CreatedDate)
+                 .HasColumnType("datetime2");
+                e.Property(p => p.UpdatedDate)
+                 .HasColumnType("datetime2");
             });
 
             modelBuilder.Entity<CustomerxItem>(e =>
@@ -142,6 +171,11 @@ namespace LapShop.Data
                 e.HasOne(a => a.Customer)
                  .WithMany(a => a.SalesInvoices)
                  .HasForeignKey(a => a.CustomerId);
+
+                e.Property(p => p.CreatedDate)
+                 .HasColumnType("datetime2");
+                e.Property(p => p.UpdatedDate)
+                 .HasColumnType("datetime2");
             });
 
             modelBuilder.Entity<SalesInvoicexItem>(e =>
