@@ -1,18 +1,44 @@
-﻿using LapShop.Data.Repository;
+﻿using System.Diagnostics;
+using LapShop.Data;
+using LapShop.Data.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace LapShop.Services.Category
 {
     public class CategoryService : ICategoryService
     {
-        private readonly IUnitOfWork _UnitOfWork;
-        public CategoryService(IUnitOfWork UnitOfWork)
+        private readonly MainContext _MainContext;
+
+        public CategoryService(MainContext mainContext)
         {
-            _UnitOfWork = UnitOfWork;
+            _MainContext = mainContext;
         }
 
-        public async Task<IEnumerable<Domains.Category>> PrepareDashboard() => await _UnitOfWork.Categories.GetAllAsync();
+        public async Task<IEnumerable<Domains.Category>> PrepareDashboard()
+        {
+            try
+            {
+                return await Task.FromResult(_MainContext.Categories);
+            }
+            catch(Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return null;
+            }
+        }
 
-        public async Task<Domains.Category> GetTargetCategory(int id) => await _UnitOfWork.Categories.GetByIdAsync(id);
+        public async Task<Domains.Category> GetTargetCategory(int id)
+        {
+            try
+            {
+                return await _MainContext.Categories.FirstOrDefaultAsync(c => c.CategoryId == id);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return null;
+            }
+        }
 
         public async Task<bool> SaveNew(Domains.Category Category)
         {
@@ -20,8 +46,10 @@ namespace LapShop.Services.Category
             {
                 Category.CategoryBy = "1";
                 Category.CreatedDate = DateTime.Now;
-                await _UnitOfWork.Categories.AddAsync(Category);
-                await _UnitOfWork.CompleteAsync();
+
+                await _MainContext.AddAsync(Category);
+                await _MainContext.SaveChangesAsync();
+
                 return true;
             }
             catch
@@ -35,8 +63,10 @@ namespace LapShop.Services.Category
             {
                 Category.UpdatedBy = "1";
                 Category.UpdatedDate = DateTime.Now;
-                _UnitOfWork.Categories.Update(Category);
-                await _UnitOfWork.CompleteAsync();
+
+                _MainContext.Update(Category);
+                await _MainContext.SaveChangesAsync();
+
                 return true;
             }
             catch
@@ -49,24 +79,24 @@ namespace LapShop.Services.Category
         {
             try
             {
-                Domains.Category TargetCategory = await _UnitOfWork.Categories.GetByIdAsync(id);
+                Domains.Category TargetCategory =  await _MainContext.Categories.FirstOrDefaultAsync(c => c.CategoryId == id);
+
                 string TargetImage = TargetCategory.ImageName;
+
                 if (TargetCategory is not null)
                 {
-                    if (!_UnitOfWork.Categories.Delete(TargetCategory))
-                    {
-                        // failed to delete in database
-                        // log database error
-                    }
-                    await _UnitOfWork.CompleteAsync();
+                    _MainContext.Remove(TargetCategory);
+                    await _MainContext.SaveChangesAsync();
+
                     return TargetImage;
                 }
                 // we somehow passed an invalid id
                 // TODO: Log this
                 return null;
             }
-            catch
+            catch(Exception e)
             {
+                Debug.WriteLine(e.Message);
                 return null;
             }
         }
