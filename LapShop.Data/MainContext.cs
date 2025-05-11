@@ -1,4 +1,4 @@
-﻿using LapShop.Data.Models;
+﻿using LapShop.Domains;
 using Microsoft.EntityFrameworkCore;
 
 namespace LapShop.Data
@@ -11,7 +11,7 @@ namespace LapShop.Data
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<ItemType> ItemTypes { get; set; }
-        public virtual DbSet<LapShop.Data.Models.OperatingSystem> OperatingSystems { get; set; }
+        public virtual DbSet<Domains.OperatingSystem> OperatingSystems { get; set; }
         public virtual DbSet<CustomerxItem> CustomerxItems { get; set; }
         public virtual DbSet<ItemDiscount> ItemDiscounts { get; set; }
         public virtual DbSet<ItemImage> ItemImages { get; set; }
@@ -43,7 +43,8 @@ namespace LapShop.Data
             {
                 e.HasKey(a => a.CategoryId);
                 e.Property(p => p.CreatedDate)
-                 .HasColumnType("datetime2");
+                 .HasColumnType("datetime2")
+                 .HasDefaultValueSql("SYSDATETIME()");
                 e.Property(p => p.UpdatedDate)
                  .HasColumnType("datetime2");
             });
@@ -52,16 +53,18 @@ namespace LapShop.Data
             {
                 e.HasKey(a => a.ItemTypeId);
                 e.Property(p => p.CreatedDate)
-                 .HasColumnType("datetime2");
+                 .HasColumnType("datetime2")
+                 .HasDefaultValueSql("SYSDATETIME()");
                 e.Property(p => p.UpdatedDate)
                  .HasColumnType("datetime2");
             });
 
-            modelBuilder.Entity<Models.OperatingSystem>(e =>
+            modelBuilder.Entity<Domains.OperatingSystem>(e =>
             {
                 e.HasKey(a => a.OperatingSystemId);
                 e.Property(p => p.CreatedDate)
-                 .HasColumnType("datetime2");
+                 .HasColumnType("datetime2")
+                 .HasDefaultValueSql("SYSDATETIME()");
                 e.Property(p => p.UpdatedDate)
                  .HasColumnType("datetime2");
             });
@@ -102,7 +105,8 @@ namespace LapShop.Data
                  .HasForeignKey(a => a.OperatingSystemId);
 
                 e.Property(p => p.CreatedDate)
-                 .HasColumnType("datetime2");
+                 .HasColumnType("datetime2")
+                 .HasDefaultValueSql("SYSDATETIME()");
                 e.Property(p => p.UpdatedDate)
                  .HasColumnType("datetime2");
             });
@@ -173,7 +177,9 @@ namespace LapShop.Data
                  .HasForeignKey(a => a.CustomerId);
 
                 e.Property(p => p.CreatedDate)
-                 .HasColumnType("datetime2");
+                 .HasColumnType("datetime2")
+                 .HasDefaultValueSql("SYSDATETIME()");
+
                 e.Property(p => p.UpdatedDate)
                  .HasColumnType("datetime2");
             });

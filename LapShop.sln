@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LapShop.Data", "LapShop.Dat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LapShop.Services", "LapShop.Services\LapShop.Services.csproj", "{8582A9EF-8B7C-485B-8C51-E3E97B87E568}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LapShop.Domains", "LapShop.Domains\LapShop.Domains.csproj", "{6C3E19F6-AB87-4A44-B711-4C86B827625D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{8582A9EF-8B7C-485B-8C51-E3E97B87E568}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8582A9EF-8B7C-485B-8C51-E3E97B87E568}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8582A9EF-8B7C-485B-8C51-E3E97B87E568}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C3E19F6-AB87-4A44-B711-4C86B827625D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C3E19F6-AB87-4A44-B711-4C86B827625D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C3E19F6-AB87-4A44-B711-4C86B827625D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C3E19F6-AB87-4A44-B711-4C86B827625D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

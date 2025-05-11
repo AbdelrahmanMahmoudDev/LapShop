@@ -1,6 +1,6 @@
 ﻿using LapShop.Data;
 using LapShop.Data.Repository;
-using LapShop.Data.Models;
+using LapShop.Domains;
 using Microsoft.EntityFrameworkCore;
 
 namespace LapShop.Tests

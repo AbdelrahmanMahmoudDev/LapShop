@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
-using LapShop.Data.Models;
+using LapShop.Domains;
 namespace LapShop.Data.Repository
 {
     public interface IUnitOfWork : IDisposable

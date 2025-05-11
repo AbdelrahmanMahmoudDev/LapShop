@@ -1,4 +1,4 @@
-﻿namespace LapShop.Data.Models
+﻿namespace LapShop.Domains
 {
     public class Item
     {
@@ -8,7 +8,7 @@
         public decimal PurchasePrice { get; set; }
         public string? ImageName { get; set; } = string.Empty;
         public DateTime CreatedDate { get; set; }
-        public DateTime CreatedBy { get; set; }
+        public string CreatedBy { get; set; } = string.Empty;
         public bool CurrentState { get; set; }
         public DateTime? UpdatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }

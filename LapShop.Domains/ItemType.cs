@@ -1,11 +1,10 @@
-﻿namespace LapShop.Data.Models
+﻿namespace LapShop.Domains
 {
-    public class OperatingSystem
+    public class ItemType
     {
-        public int OperatingSystemId { get; set; }
-        public string OperatingSystemName { get; set; } = string.Empty;
-        public string ImageName { get; set; } = string.Empty;
-        public bool ShowInHomePage { get; set; }
+        public int ItemTypeId { get; set; }
+        public string ItemTypeName { get; set; } = string.Empty;
+        public string? ImageName { get; set; } = string.Empty;
         public int CurrentState { get; set; }
         public DateTime CreatedDate { get; set; }
         public string CreatedBy { get; set; } = string.Empty;

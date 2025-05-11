@@ -2,10 +2,10 @@
 {
     public interface ICategoryService
     {
-        public Task<IEnumerable<Data.Models.Category>> PrepareDashboard();
-        public Task<Data.Models.Category> GetTargetCategory(int id);
-        public Task<bool> SaveNew(Data.Models.Category Category);
-        public Task<bool> SaveUpdate(Data.Models.Category category);
+        public Task<IEnumerable<Domains.Category>> PrepareDashboard();
+        public Task<Domains.Category> GetTargetCategory(int id);
+        public Task<bool> SaveNew(Domains.Category Category);
+        public Task<bool> SaveUpdate(Domains.Category category);
         public Task<string> RemoveCategory(int id);
     }
 }

@@ -1,5 +1,5 @@
 ﻿using LapShop.Services.Category;
-using LapShop.Data.Models;
+using LapShop.Domains;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LapShop.Areas.Admin.Controllers

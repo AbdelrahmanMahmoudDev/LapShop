@@ -1,4 +1,4 @@
-﻿using LapShop.Data.Models;
+﻿using LapShop.Domains;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace LapShop.Data.Repository

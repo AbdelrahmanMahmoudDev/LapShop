@@ -1,5 +1,4 @@
-﻿using LapShop.Data.Models;
-using LapShop.Data.Repository;
+﻿using LapShop.Data.Repository;
 
 namespace LapShop.Services.Category
 {
@@ -11,11 +10,11 @@ namespace LapShop.Services.Category
             _UnitOfWork = UnitOfWork;
         }
 
-        public async Task<IEnumerable<Data.Models.Category>> PrepareDashboard() => await _UnitOfWork.Categories.GetAllAsync();
+        public async Task<IEnumerable<Domains.Category>> PrepareDashboard() => await _UnitOfWork.Categories.GetAllAsync();
 
-        public async Task<Data.Models.Category> GetTargetCategory(int id) => await _UnitOfWork.Categories.GetByIdAsync(id);
+        public async Task<Domains.Category> GetTargetCategory(int id) => await _UnitOfWork.Categories.GetByIdAsync(id);
 
-        public async Task<bool> SaveNew(Data.Models.Category Category)
+        public async Task<bool> SaveNew(Domains.Category Category)
         {
             try
             {
@@ -30,7 +29,7 @@ namespace LapShop.Services.Category
                 return false;
             }
         }
-        public async Task<bool> SaveUpdate(Data.Models.Category Category)
+        public async Task<bool> SaveUpdate(Domains.Category Category)
         {
             try
             {
@@ -50,7 +49,7 @@ namespace LapShop.Services.Category
         {
             try
             {
-                Data.Models.Category TargetCategory = await _UnitOfWork.Categories.GetByIdAsync(id);
+                Domains.Category TargetCategory = await _UnitOfWork.Categories.GetByIdAsync(id);
                 string TargetImage = TargetCategory.ImageName;
                 if (TargetCategory is not null)
                 {

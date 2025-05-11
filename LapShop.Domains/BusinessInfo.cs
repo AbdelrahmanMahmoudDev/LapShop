@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace LapShop.Data.Models
+namespace LapShop.Domains
 {
     public class BusinessInfo
     {

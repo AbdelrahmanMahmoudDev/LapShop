@@ -1,4 +1,4 @@
-﻿namespace LapShop.Data.Models
+﻿namespace LapShop.Domains
 {
     public class PurchaseInvoicexItem
     {
