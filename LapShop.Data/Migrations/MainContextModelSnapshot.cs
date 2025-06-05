@@ -22,7 +22,7 @@ namespace LapShop.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("LapShop.Data.Models.BusinessInfo", b =>
+            modelBuilder.Entity("LapShop.Domains.BusinessInfo", b =>
                 {
                     b.Property<int>("BusinessInfoId")
                         .ValueGeneratedOnAdd()
@@ -51,7 +51,7 @@ namespace LapShop.Data.Migrations
                     b.ToTable("BusinessInfo");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.CashTransaction", b =>
+            modelBuilder.Entity("LapShop.Domains.CashTransaction", b =>
                 {
                     b.Property<int>("CashTransactionId")
                         .ValueGeneratedOnAdd()
@@ -75,7 +75,7 @@ namespace LapShop.Data.Migrations
                     b.ToTable("CashTransactions");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.Category", b =>
+            modelBuilder.Entity("LapShop.Domains.Category", b =>
                 {
                     b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
@@ -121,7 +121,7 @@ namespace LapShop.Data.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.Customer", b =>
+            modelBuilder.Entity("LapShop.Domains.Customer", b =>
                 {
                     b.Property<int>("CustomerId")
                         .ValueGeneratedOnAdd()
@@ -139,7 +139,7 @@ namespace LapShop.Data.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.CustomerxItem", b =>
+            modelBuilder.Entity("LapShop.Domains.CustomerxItem", b =>
                 {
                     b.Property<int>("CustomerxItemId")
                         .ValueGeneratedOnAdd()
@@ -162,7 +162,7 @@ namespace LapShop.Data.Migrations
                     b.ToTable("CustomerxItems");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.DeliveryMan", b =>
+            modelBuilder.Entity("LapShop.Domains.DeliveryMan", b =>
                 {
                     b.Property<int>("DeliveryManId")
                         .ValueGeneratedOnAdd()
@@ -180,7 +180,7 @@ namespace LapShop.Data.Migrations
                     b.ToTable("DeliveryMen");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.Item", b =>
+            modelBuilder.Entity("LapShop.Domains.Item", b =>
                 {
                     b.Property<int>("ItemId")
                         .ValueGeneratedOnAdd()
@@ -273,7 +273,7 @@ namespace LapShop.Data.Migrations
                     b.ToTable("Items");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.ItemDiscount", b =>
+            modelBuilder.Entity("LapShop.Domains.ItemDiscount", b =>
                 {
                     b.Property<int>("ItemDiscountId")
                         .ValueGeneratedOnAdd()
@@ -297,7 +297,7 @@ namespace LapShop.Data.Migrations
                     b.ToTable("ItemDiscounts");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.ItemImage", b =>
+            modelBuilder.Entity("LapShop.Domains.ItemImage", b =>
                 {
                     b.Property<int>("ItemImageId")
                         .ValueGeneratedOnAdd()
@@ -320,7 +320,7 @@ namespace LapShop.Data.Migrations
                     b.ToTable("ItemImages");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.ItemType", b =>
+            modelBuilder.Entity("LapShop.Domains.ItemType", b =>
                 {
                     b.Property<int>("ItemTypeId")
                         .ValueGeneratedOnAdd()
@@ -362,7 +362,7 @@ namespace LapShop.Data.Migrations
                     b.ToTable("ItemTypes");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.OperatingSystem", b =>
+            modelBuilder.Entity("LapShop.Domains.OperatingSystem", b =>
                 {
                     b.Property<int>("OperatingSystemId")
                         .ValueGeneratedOnAdd()
@@ -408,7 +408,7 @@ namespace LapShop.Data.Migrations
                     b.ToTable("OperatingSystems");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.PurchaseInvoice", b =>
+            modelBuilder.Entity("LapShop.Domains.PurchaseInvoice", b =>
                 {
                     b.Property<int>("PurchaseInvoiceId")
                         .ValueGeneratedOnAdd()
@@ -433,7 +433,7 @@ namespace LapShop.Data.Migrations
                     b.ToTable("PurchaseInvoices");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.PurchaseInvoicexItem", b =>
+            modelBuilder.Entity("LapShop.Domains.PurchaseInvoicexItem", b =>
                 {
                     b.Property<int>("PurchaseInvoicexItemId")
                         .ValueGeneratedOnAdd()
@@ -456,7 +456,7 @@ namespace LapShop.Data.Migrations
                     b.ToTable("PurchaseInvoicexItems");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.SalesInvoice", b =>
+            modelBuilder.Entity("LapShop.Domains.SalesInvoice", b =>
                 {
                     b.Property<int>("SalesInvoiceId")
                         .ValueGeneratedOnAdd()
@@ -509,7 +509,7 @@ namespace LapShop.Data.Migrations
                     b.ToTable("SalesInvoices");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.SalesInvoicexItem", b =>
+            modelBuilder.Entity("LapShop.Domains.SalesInvoicexItem", b =>
                 {
                     b.Property<int>("SalesInvoicexItemId")
                         .ValueGeneratedOnAdd()
@@ -542,7 +542,7 @@ namespace LapShop.Data.Migrations
                     b.ToTable("SalesInvoicexItems");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.Slider", b =>
+            modelBuilder.Entity("LapShop.Domains.Slider", b =>
                 {
                     b.Property<int>("SliderId")
                         .ValueGeneratedOnAdd()
@@ -568,7 +568,7 @@ namespace LapShop.Data.Migrations
                     b.ToTable("Sliders");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.Supplier", b =>
+            modelBuilder.Entity("LapShop.Domains.Supplier", b =>
                 {
                     b.Property<int>("SupplierId")
                         .ValueGeneratedOnAdd()
@@ -586,9 +586,16 @@ namespace LapShop.Data.Migrations
                     b.ToTable("Suppliers");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.BusinessInfo", b =>
+            modelBuilder.Entity("LapShop.Domains.Views.VwItems", b =>
                 {
-                    b.HasOne("LapShop.Data.Models.Customer", "Customer")
+                    b.ToTable((string)null);
+
+                    b.ToView("VwItems", (string)null);
+                });
+
+            modelBuilder.Entity("LapShop.Domains.BusinessInfo", b =>
+                {
+                    b.HasOne("LapShop.Domains.Customer", "Customer")
                         .WithMany("BusinessInfo")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -597,9 +604,9 @@ namespace LapShop.Data.Migrations
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.CashTransaction", b =>
+            modelBuilder.Entity("LapShop.Domains.CashTransaction", b =>
                 {
-                    b.HasOne("LapShop.Data.Models.Customer", "Customer")
+                    b.HasOne("LapShop.Domains.Customer", "Customer")
                         .WithMany("CashTransactions")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -608,15 +615,15 @@ namespace LapShop.Data.Migrations
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.CustomerxItem", b =>
+            modelBuilder.Entity("LapShop.Domains.CustomerxItem", b =>
                 {
-                    b.HasOne("LapShop.Data.Models.Customer", "Customer")
+                    b.HasOne("LapShop.Domains.Customer", "Customer")
                         .WithMany("CustomerxItems")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("LapShop.Data.Models.Item", "Item")
+                    b.HasOne("LapShop.Domains.Item", "Item")
                         .WithMany("CustomerxItems")
                         .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -627,19 +634,19 @@ namespace LapShop.Data.Migrations
                     b.Navigation("Item");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.Item", b =>
+            modelBuilder.Entity("LapShop.Domains.Item", b =>
                 {
-                    b.HasOne("LapShop.Data.Models.Category", "Category")
+                    b.HasOne("LapShop.Domains.Category", "Category")
                         .WithMany("Items")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("LapShop.Data.Models.ItemType", "ItemType")
+                    b.HasOne("LapShop.Domains.ItemType", "ItemType")
                         .WithMany("Items")
                         .HasForeignKey("ItemTypeId");
 
-                    b.HasOne("LapShop.Data.Models.OperatingSystem", "OperatingSystem")
+                    b.HasOne("LapShop.Domains.OperatingSystem", "OperatingSystem")
                         .WithMany("Items")
                         .HasForeignKey("OperatingSystemId");
 
@@ -650,9 +657,9 @@ namespace LapShop.Data.Migrations
                     b.Navigation("OperatingSystem");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.ItemDiscount", b =>
+            modelBuilder.Entity("LapShop.Domains.ItemDiscount", b =>
                 {
-                    b.HasOne("LapShop.Data.Models.Item", "Item")
+                    b.HasOne("LapShop.Domains.Item", "Item")
                         .WithMany("ItemDiscounts")
                         .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -661,9 +668,9 @@ namespace LapShop.Data.Migrations
                     b.Navigation("Item");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.ItemImage", b =>
+            modelBuilder.Entity("LapShop.Domains.ItemImage", b =>
                 {
-                    b.HasOne("LapShop.Data.Models.Item", "Item")
+                    b.HasOne("LapShop.Domains.Item", "Item")
                         .WithMany("ItemImages")
                         .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -672,9 +679,9 @@ namespace LapShop.Data.Migrations
                     b.Navigation("Item");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.PurchaseInvoice", b =>
+            modelBuilder.Entity("LapShop.Domains.PurchaseInvoice", b =>
                 {
-                    b.HasOne("LapShop.Data.Models.Supplier", "Supplier")
+                    b.HasOne("LapShop.Domains.Supplier", "Supplier")
                         .WithMany("PurchaseInvoices")
                         .HasForeignKey("SupplierId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -683,15 +690,15 @@ namespace LapShop.Data.Migrations
                     b.Navigation("Supplier");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.PurchaseInvoicexItem", b =>
+            modelBuilder.Entity("LapShop.Domains.PurchaseInvoicexItem", b =>
                 {
-                    b.HasOne("LapShop.Data.Models.Item", "Item")
+                    b.HasOne("LapShop.Domains.Item", "Item")
                         .WithMany("PurchaseInvoicexItems")
                         .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("LapShop.Data.Models.PurchaseInvoice", "PurchaseInvoice")
+                    b.HasOne("LapShop.Domains.PurchaseInvoice", "PurchaseInvoice")
                         .WithMany("PurchaseInvoicexItems")
                         .HasForeignKey("PurchaseInvoiceId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -702,15 +709,15 @@ namespace LapShop.Data.Migrations
                     b.Navigation("PurchaseInvoice");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.SalesInvoice", b =>
+            modelBuilder.Entity("LapShop.Domains.SalesInvoice", b =>
                 {
-                    b.HasOne("LapShop.Data.Models.Customer", "Customer")
+                    b.HasOne("LapShop.Domains.Customer", "Customer")
                         .WithMany("SalesInvoices")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("LapShop.Data.Models.DeliveryMan", "DeliveryMan")
+                    b.HasOne("LapShop.Domains.DeliveryMan", "DeliveryMan")
                         .WithMany("SalesInvoices")
                         .HasForeignKey("DeliveryManId");
 
@@ -719,15 +726,15 @@ namespace LapShop.Data.Migrations
                     b.Navigation("DeliveryMan");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.SalesInvoicexItem", b =>
+            modelBuilder.Entity("LapShop.Domains.SalesInvoicexItem", b =>
                 {
-                    b.HasOne("LapShop.Data.Models.Item", "Item")
+                    b.HasOne("LapShop.Domains.Item", "Item")
                         .WithMany("SalesInvoicexItems")
                         .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("LapShop.Data.Models.SalesInvoice", "SalesInvoice")
+                    b.HasOne("LapShop.Domains.SalesInvoice", "SalesInvoice")
                         .WithMany("SalesInvoicexItems")
                         .HasForeignKey("SalesInvoiceId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -738,12 +745,12 @@ namespace LapShop.Data.Migrations
                     b.Navigation("SalesInvoice");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.Category", b =>
+            modelBuilder.Entity("LapShop.Domains.Category", b =>
                 {
                     b.Navigation("Items");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.Customer", b =>
+            modelBuilder.Entity("LapShop.Domains.Customer", b =>
                 {
                     b.Navigation("BusinessInfo");
 
@@ -754,12 +761,12 @@ namespace LapShop.Data.Migrations
                     b.Navigation("SalesInvoices");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.DeliveryMan", b =>
+            modelBuilder.Entity("LapShop.Domains.DeliveryMan", b =>
                 {
                     b.Navigation("SalesInvoices");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.Item", b =>
+            modelBuilder.Entity("LapShop.Domains.Item", b =>
                 {
                     b.Navigation("CustomerxItems");
 
@@ -772,27 +779,27 @@ namespace LapShop.Data.Migrations
                     b.Navigation("SalesInvoicexItems");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.ItemType", b =>
+            modelBuilder.Entity("LapShop.Domains.ItemType", b =>
                 {
                     b.Navigation("Items");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.OperatingSystem", b =>
+            modelBuilder.Entity("LapShop.Domains.OperatingSystem", b =>
                 {
                     b.Navigation("Items");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.PurchaseInvoice", b =>
+            modelBuilder.Entity("LapShop.Domains.PurchaseInvoice", b =>
                 {
                     b.Navigation("PurchaseInvoicexItems");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.SalesInvoice", b =>
+            modelBuilder.Entity("LapShop.Domains.SalesInvoice", b =>
                 {
                     b.Navigation("SalesInvoicexItems");
                 });
 
-            modelBuilder.Entity("LapShop.Data.Models.Supplier", b =>
+            modelBuilder.Entity("LapShop.Domains.Supplier", b =>
                 {
                     b.Navigation("PurchaseInvoices");
                 });

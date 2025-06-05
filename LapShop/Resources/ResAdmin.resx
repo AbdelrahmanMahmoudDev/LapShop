@@ -120,6 +120,9 @@
   <data name="LblCategories" xml:space="preserve">
     <value>Categories</value>
   </data>
+  <data name="LblCategoryName" xml:space="preserve">
+    <value>Category</value>
+  </data>
   <data name="LblDelete" xml:space="preserve">
     <value>Delete</value>
   </data>
@@ -132,11 +135,29 @@
   <data name="LblFormSubmit" xml:space="preserve">
     <value>Submit</value>
   </data>
+  <data name="LblGpu" xml:space="preserve">
+    <value>Gpu</value>
+  </data>
+  <data name="LblHardDisk" xml:space="preserve">
+    <value>Hard Disk</value>
+  </data>
   <data name="LblId" xml:space="preserve">
     <value>Id</value>
   </data>
   <data name="LblImageUpload" xml:space="preserve">
     <value>Upload an image</value>
+  </data>
+  <data name="LblImageView" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="LblItemName" xml:space="preserve">
+    <value>Item</value>
+  </data>
+  <data name="LblItems" xml:space="preserve">
+    <value>Items</value>
+  </data>
+  <data name="LblItemTypeName" xml:space="preserve">
+    <value>Item Type</value>
   </data>
   <data name="LblName" xml:space="preserve">
     <value>Name</value>
@@ -144,10 +165,34 @@
   <data name="LblNew" xml:space="preserve">
     <value>New</value>
   </data>
+  <data name="LblOperatingSystemName" xml:space="preserve">
+    <value>Operating System</value>
+  </data>
+  <data name="LblProcessor" xml:space="preserve">
+    <value>Processor</value>
+  </data>
+  <data name="LblPurchasePrice" xml:space="preserve">
+    <value>Purchase Price</value>
+  </data>
+  <data name="LblRamSize" xml:space="preserve">
+    <value>Ram Size</value>
+  </data>
+  <data name="LblSalesPrice" xml:space="preserve">
+    <value>Sales Price</value>
+  </data>
+  <data name="LblScreenResolution" xml:space="preserve">
+    <value>Screen Resolution</value>
+  </data>
+  <data name="LblScreenSize" xml:space="preserve">
+    <value>Screen Size</value>
+  </data>
   <data name="LblShowInHomePage" xml:space="preserve">
     <value>Show in home page</value>
   </data>
   <data name="LblUpload" xml:space="preserve">
     <value>Upload</value>
+  </data>
+  <data name="LblWeight" xml:space="preserve">
+    <value>Weight</value>
   </data>
 </root>

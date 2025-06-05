@@ -9,7 +9,7 @@
       "iDisplayLength": 10,
       "language": {
         search: ""
-      }
+      },
     });
     $('#order-listing').each(function() {
       var datatable = $(this);

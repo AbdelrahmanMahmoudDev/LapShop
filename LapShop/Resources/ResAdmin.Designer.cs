@@ -70,6 +70,15 @@ namespace LapShop.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Category.
+        /// </summary>
+        public static string LblCategoryName {
+            get {
+                return ResourceManager.GetString("LblCategoryName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string LblDelete {
@@ -106,6 +115,24 @@ namespace LapShop.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Gpu.
+        /// </summary>
+        public static string LblGpu {
+            get {
+                return ResourceManager.GetString("LblGpu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hard Disk.
+        /// </summary>
+        public static string LblHardDisk {
+            get {
+                return ResourceManager.GetString("LblHardDisk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Id.
         /// </summary>
         public static string LblId {
@@ -120,6 +147,42 @@ namespace LapShop.Resources {
         public static string LblImageUpload {
             get {
                 return ResourceManager.GetString("LblImageUpload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image.
+        /// </summary>
+        public static string LblImageView {
+            get {
+                return ResourceManager.GetString("LblImageView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Item.
+        /// </summary>
+        public static string LblItemName {
+            get {
+                return ResourceManager.GetString("LblItemName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Items.
+        /// </summary>
+        public static string LblItems {
+            get {
+                return ResourceManager.GetString("LblItems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Item Type.
+        /// </summary>
+        public static string LblItemTypeName {
+            get {
+                return ResourceManager.GetString("LblItemTypeName", resourceCulture);
             }
         }
         
@@ -142,6 +205,69 @@ namespace LapShop.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Operating System.
+        /// </summary>
+        public static string LblOperatingSystemName {
+            get {
+                return ResourceManager.GetString("LblOperatingSystemName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Processor.
+        /// </summary>
+        public static string LblProcessor {
+            get {
+                return ResourceManager.GetString("LblProcessor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Purchase Price.
+        /// </summary>
+        public static string LblPurchasePrice {
+            get {
+                return ResourceManager.GetString("LblPurchasePrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ram Size.
+        /// </summary>
+        public static string LblRamSize {
+            get {
+                return ResourceManager.GetString("LblRamSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sales Price.
+        /// </summary>
+        public static string LblSalesPrice {
+            get {
+                return ResourceManager.GetString("LblSalesPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Screen Resolution.
+        /// </summary>
+        public static string LblScreenResolution {
+            get {
+                return ResourceManager.GetString("LblScreenResolution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Screen Size.
+        /// </summary>
+        public static string LblScreenSize {
+            get {
+                return ResourceManager.GetString("LblScreenSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show in home page.
         /// </summary>
         public static string LblShowInHomePage {
@@ -156,6 +282,15 @@ namespace LapShop.Resources {
         public static string LblUpload {
             get {
                 return ResourceManager.GetString("LblUpload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weight.
+        /// </summary>
+        public static string LblWeight {
+            get {
+                return ResourceManager.GetString("LblWeight", resourceCulture);
             }
         }
     }

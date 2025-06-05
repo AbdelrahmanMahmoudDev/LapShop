@@ -1,4 +1,5 @@
 ﻿using LapShop.Domains;
+using LapShop.Domains.Views;
 using Microsoft.EntityFrameworkCore;
 
 namespace LapShop.Data
@@ -22,6 +23,7 @@ namespace LapShop.Data
         public virtual DbSet<SalesInvoice> SalesInvoices { get; set; }
         public virtual DbSet<SalesInvoicexItem> SalesInvoicexItems { get; set; }
         public virtual DbSet<Slider> Sliders { get; set; }
+        public virtual DbSet<VwItems> VwItems { get; set; }
         public MainContext() : base() { }
         public MainContext(DbContextOptions<MainContext> Options) : base(Options) { }
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
@@ -195,6 +197,12 @@ namespace LapShop.Data
                 e.HasOne(a => a.Item)
                  .WithMany(a => a.SalesInvoicexItems)
                  .HasForeignKey(a => a.ItemId);
+            });
+
+            modelBuilder.Entity<VwItems>(e =>
+            {
+                e.HasNoKey();
+                e.ToView("VwItems");
             });
         }
     }

@@ -1,0 +1,153 @@
+﻿@model VwItemsVM
+<div class="container-fluid page-body-wrapper">
+	<div class="main-panel">
+		<div class="content-wrapper">
+			<div class="page-header">
+				<h3>@ResAdmin.LblItems</h3>
+			</div>
+			<div>
+				<form class="forms-sample row" method="post" asp-area="Admin" asp-controller="Item" asp-action="Save" role="form" enctype="multipart/form-data">
+					<input type="hidden" asp-for="ItemId" />
+					<div class="col-6 grid-margin stretch-card">
+						<div class="card">
+							<div class="card-body">
+								<div class="form-group">
+									<label asp-for="ItemName">Item Name</label>
+									<input asp-for="ItemName" type="text" class="form-control" placeholder="Item Name">
+									<span asp-validation-for="ItemName" class="text-danger"></span>
+								</div>
+
+								<div class="form-group">
+									<label asp-for="SalesPrice"> Sales Price</label>
+									<input asp-for="SalesPrice" type="number" class="form-control" placeholder="Sales Price">
+									<span asp-validation-for="SalesPrice" class="text-danger"></span>
+								</div>
+
+								<div class="form-group">
+									<label asp-for="PurchasePrice"> Purchase Price</label>
+									<input asp-for="PurchasePrice" type="number" class="form-control" placeholder="Purchase Price">
+									<span asp-validation-for="PurchasePrice" class="text-danger"></span>
+								</div>
+
+								<!--3 select lists for category, item type and operating system-->
+
+								<div class="form-group">
+									<label>@ResAdmin.LblImageUpload</label>
+									<input asp-for="ImageName" type="file" name="File" class="file-upload-default" onchange="Upload.UploadDefaultImg(event)" accept=".jpg, .jpeg, .png, ,.gif">
+									<div class="input-group col-xs-12">
+										<input type="text" class="form-control file-upload-info" disabled="" placeholder="UploadImage" asp-for="ImageName">
+										<span class="input-group-append">
+											<button class="file-upload-browse btn btn-gradient-primary" type="button">@ResAdmin.LblUpload</button>
+										</span>
+									</div>
+								</div>
+
+								@if (!string.IsNullOrEmpty(Model?.ImageName))
+								{
+									<div id="tbImgSrc">
+										<img class="thumbnail" src="/Uploads/Items/@Model?.ImageName" style="width: 80%; border-radius: 5px;border: 1px solid #d9d9d9;padding: 1px;" />
+									</div>
+								}
+
+								<div class="form-group">
+									<label asp-for="CategoryId">Category</label>
+									<select class"form-select" asp-for="CategoryId" asp-items="@(new SelectList(@Model?.Categories, "CategoryId", "CategoryName"))" class="form-control">
+										<option value="">-- Select a category --</option>
+									</select>
+								</div>
+
+								<div class="form-group">
+									<label asp-for="OperatingSystemId">Operating System</label>
+									<select class"form-select" asp-for="OperatingSystemId" asp-items="@(new SelectList(@Model?.OperatingSystems, "OperatingSystemId", "OperatingSystemName"))" class="form-control">
+										<option value="">-- Select an operating system --</option>
+									</select>
+								</div>
+
+								<div class="form-group">
+									<label asp-for="ItemTypeId">Item Type</label>
+									<select class"form-select" asp-for="ItemTypeId" asp-items="@(new SelectList(@Model?.ItemTypes, "ItemTypeId", "ItemTypeName"))" class="form-control">
+										<option value="">-- Select an item type --</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-6 grid-margin stretch-card">
+						<div class="card">
+							<div class="card-body">
+
+								<div class="form-group">
+									<label asp-for="Gpu">Gpu</label>
+									<input asp-for="Gpu" type="text" class="form-control" placeholder="Graphics card">
+									<span asp-validation-for="Gpu" class="text-danger"></span>
+								</div>
+
+								<div class="form-group">
+									<label asp-for="HardDisk">Hard Disk</label>
+									<input asp-for="HardDisk" type="text" class="form-control" placeholder="Hard disk">
+									<span asp-validation-for="HardDisk" class="text-danger"></span>
+								</div>
+
+								<div class="form-group">
+									<label asp-for="Processor">Processor</label>
+									<input asp-for="Processor" type="text" class="form-control" placeholder="Processor">
+									<span asp-validation-for="Processor" class="text-danger"></span>
+								</div>
+
+								<div class="form-group">
+									<label asp-for="RamSize">Ram Size</label>
+									<input asp-for="RamSize" type="number" class="form-control" placeholder="RamSize">
+									<span asp-validation-for="RamSize" class="text-danger"></span>
+								</div>
+
+								<div class="form-group">
+									<label asp-for="ScreenResolution">Screen Resolution</label>
+									<input asp-for="ScreenResolution" type="text" class="form-control" placeholder="Screen Resolution">
+									<span asp-validation-for="ScreenResolution" class="text-danger"></span>
+								</div>
+
+								<div class="form-group">
+									<label asp-for="ScreenSize">Screen Size</label>
+									<input asp-for="ScreenSize" type="text" class="form-control" placeholder="Screen Size">
+									<span asp-validation-for="ScreenSize" class="text-danger"></span>
+								</div>
+
+								<div class="form-group">
+									<label asp-for="Weight">Weight</label>
+									<input asp-for="Weight" type="text" class="form-control" placeholder="Screen Size">
+									<span asp-validation-for="ScreenSize" class="text-danger"></span>
+								</div>
+
+								<button type="submit" class="btn btn-gradient-primary me-2">@ResAdmin.LblFormSubmit</button>
+
+								<a asp-area="Admin" asp-controller="Item" asp-action="Index" class="btn btn-light">@ResAdmin.LblFormCancel</a>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts
+{
+	<script src="~/admin/assets/js/file-upload.js"></script>
+
+	<script>
+
+		var Upload = {
+				UploadDefaultImg: function(e) {
+				const file = e.target.files[0];
+				const reader = new FileReader();
+				reader.onloadend = () => {
+					CourseMediaImgName = file.name;
+					CourseMediaImgBase64 = reader.result.slice(reader.result.indexOf('base64,') + 7);
+					$("#tbImgName").html(file.name)
+					$("#tbImgSrc").html(`<img class="thumbnail" alt="Upload an image!" src = "${reader.result}"  style = "width: 80%; border-radius: 5px;border: 1px solid #d9d9d9;padding: 1px;"/>`)
+				};
+				reader.readAsDataURL(file);
+			}
+		}
+	</script>
+}

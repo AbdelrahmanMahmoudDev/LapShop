@@ -1,0 +1,44 @@
+﻿@model List<VwItemsVM>
+
+<style>
+	#order-listing td, #order-listing th {
+		max-width: 150px; /* Adjust as needed */
+		overflow: hidden;
+		text-overflow: ellipsis; /* Add ellipsis (...) for overflowed text */
+		white-space: nowrap; /* Prevent text wrapping */
+	}
+</style>
+
+<table id="order-listing" class="table no-footer" aria-describedby="order-listing_info">
+	<thead>
+		<tr>
+			<th class="sorting sorting_asc" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Order #: activate to sort column descending" style="width: 107.05px;">@ResAdmin.LblItemName</th>
+			<th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" aria-label="Purchased On: activate to sort column ascending" style="width: 171.012px;">@ResAdmin.LblSalesPrice</th>
+			<th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" aria-label="Purchased On: activate to sort column ascending" style="width: 171.012px;">@ResAdmin.LblPurchasePrice</th>
+			<th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" aria-label="Purchased On: activate to sort column ascending" style="width: 171.012px;">@ResAdmin.LblCategoryName</th>
+			<th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" aria-label="Purchased On: activate to sort column ascending" style="width: 171.012px;">@ResAdmin.LblItemTypeName</th>
+			<th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" aria-label="Purchased On: activate to sort column ascending" style="width: 171.012px;">@ResAdmin.LblOperatingSystemName</th>
+			<th></th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var Element in Model)
+		{
+			<tr class="odd">
+				<td class="sorting_1"> @Element.ItemName </td>
+				<td> @Element.SalesPrice </td>
+				<td> @Element.PurchasePrice </td>
+				<td> @Element.CategoryName </td>
+				<td> @Element.ItemTypeName </td>
+				<td> @Element.OperatingSystemName </td>
+				<td>
+					<a asp-area="Admin" asp-controller="Item" asp-action="Edit" asp-route-id="@Element.ItemId" class="btn btn-inverse-warning btn-fw">@ResAdmin.LblEdit</a>
+				</td>
+				<td>
+					<a asp-area="Admin" asp-controller="Item" asp-action="Delete" asp-route-id="@Element.ItemId" class="btn btn-inverse-danger btn-fw">@ResAdmin.LblDelete</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
