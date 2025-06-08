@@ -115,7 +115,8 @@ namespace LapShop.Services.Item
             {
                 try
                 {
-                    newItem.ImageName = await Utilities.FileUtility.SaveFile(itemVM.File, "Images\\Items", [".jpg", ".jpeg", ".png"]);
+                    string windowsPath = await Utilities.FileUtility.SaveFile(itemVM.File, "Images\\Items", [".jpg", ".jpeg", ".png"]);
+                    newItem.ImageName = windowsPath.Replace("\\", "/");
                 }
                 catch (InvalidOperationException ex)
                 {
@@ -163,7 +164,9 @@ namespace LapShop.Services.Item
             {
                 try
                 {
-                    existingItem.ImageName = await Utilities.FileUtility.SaveFile(itemVM.File, "Images\\Items", [".jpg", ".jpeg", ".png"]);
+                    Utilities.FileUtility.DeleteFile(itemVM.ImageName);
+                    string windowsPath = await Utilities.FileUtility.SaveFile(itemVM.File, "Images\\Items", [".jpg", ".jpeg", ".png"]);
+                    existingItem.ImageName = windowsPath.Replace("\\", "/");
                 }
                 catch (InvalidOperationException ex)
                 {
@@ -219,19 +222,19 @@ namespace LapShop.Services.Item
                 homepageVM = new HomepageVM();
             }
 
-            homepageVM.TopCollections = _MainContext.VwItems
+            homepageVM.TopCollections = _MainContext.Items
                 .OrderByDescending(i => i.SalesPrice)
                 .Take(5)
                 .ToList();
-            homepageVM.NewProducts = _MainContext.VwItems
+            homepageVM.NewProducts = _MainContext.Items
                 .OrderByDescending(i => i.SalesPrice)
                 .Take(5)
                 .ToList();
-            homepageVM.FeaturedProducts = _MainContext.VwItems
+            homepageVM.FeaturedProducts = _MainContext.Items
                 .OrderByDescending(i => i.SalesPrice)
                 .Take(5)
                 .ToList();
-            homepageVM.BestSellers = _MainContext.VwItems
+            homepageVM.BestSellers = _MainContext.Items
                 .OrderByDescending(i => i.SalesPrice)
                 .Take(5)
                 .ToList();

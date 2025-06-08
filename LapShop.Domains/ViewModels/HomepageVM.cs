@@ -4,20 +4,20 @@ namespace LapShop.Domains.ViewModels
 {
     public class HomepageVM
     {
-        public List<VwItems> TopCollections { get; set; } = new List<VwItems>();
-        public List<VwItems> NewProducts { get; set; } = new List<VwItems>();
-        public List<VwItems> FeaturedProducts { get; set; } = new List<VwItems>();
-        public List<VwItems> BestSellers { get; set; } = new List<VwItems>();
+        public List<Item> TopCollections { get; set; } = new List<Item>();
+        public List<Item> NewProducts { get; set; } = new List<Item>();
+        public List<Item> FeaturedProducts { get; set; } = new List<Item>();
+        public List<Item> BestSellers { get; set; } = new List<Item>();
 
-        public HomepageVM(List<VwItems> topCollections = null,
-                          List<VwItems> newProducts = null,
-                          List<VwItems> featuredProducts = null,
-                          List<VwItems> bestSellers = null)
+        public HomepageVM(List<Item> topCollections = null,
+                          List<Item> newProducts = null,
+                          List<Item> featuredProducts = null,
+                          List<Item> bestSellers = null)
         {
-            TopCollections = topCollections ?? new List<VwItems>();
-            NewProducts = newProducts ?? new List<VwItems>();
-            FeaturedProducts = featuredProducts ?? new List<VwItems>();
-            BestSellers = bestSellers ?? new List<VwItems>();
+            TopCollections = topCollections ?? new List<Item>();
+            NewProducts = newProducts ?? new List<Item>();
+            FeaturedProducts = featuredProducts ?? new List<Item>();
+            BestSellers = bestSellers ?? new List<Item>();
         }
     }
 }
