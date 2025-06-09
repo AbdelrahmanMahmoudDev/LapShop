@@ -2,6 +2,7 @@ using LapShop.Services.Category;
 using LapShop.Data.Repository;
 using Microsoft.EntityFrameworkCore;
 using LapShop.Services.Item;
+using LapShop.Services.Order;
 
 namespace LapShop
 {
@@ -21,7 +22,11 @@ namespace LapShop
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<IItemService, ItemService>();
+            builder.Services.AddScoped<IOrderService, OrderService>();
 
+            builder.Services.AddSession();
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.AddDistributedMemoryCache();
             var app = builder.Build();
             Utilities.FileUtility.WebRootPath = app.Environment.WebRootPath;
             // Configure the HTTP request pipeline.
@@ -32,6 +37,7 @@ namespace LapShop
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSession();
 
             app.MapStaticAssets();
 

@@ -344,7 +344,7 @@
                                         </div>
                                     </div>
                                     <div class="product-buttons">
-                                        <a href="#" data-toggle="modal"
+                                        <a asp-controller="Order" asp-action="AddToCart" asp-route-id="@Model.Item.ItemId" data-toggle="modal"
                                            data-target="#addtocart" class="btn btn-solid">add to cart</a> <a href="#" class="btn btn-solid">buy now</a>
                                     </div>
                                     <div class="border-product">
@@ -589,9 +589,9 @@
                                 </a>
                             </div>
                             <div class="cart-info cart-wrap">
-                                <button data-toggle="modal" data-target="#addtocart" title="Add to cart">
+                                <a asp-controller="Order" asp-action="AddToCart" asp-route-id="@item.ItemId">
                                     <i class="ti-shopping-cart"></i>
-                                </button> <a href="javascript:void(0)"
+                                </a> <a href="javascript:void(0)"
                                              title="Add to Wishlist"><i class="ti-heart" aria-hidden="true"></i></a> <a href="#"
                                                                                                                         data-toggle="modal" data-target="#quick-view" title="Quick View">
                                     <i class="ti-search" aria-hidden="true"></i>

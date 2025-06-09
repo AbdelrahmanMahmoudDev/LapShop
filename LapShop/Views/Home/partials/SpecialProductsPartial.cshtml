@@ -128,10 +128,9 @@
 												</a>
 											</div>
 											<div class="cart-info cart-wrap">
-												<button data-toggle="modal" data-target="#addtocart"
-														title="Add to cart">
+												<a asp-controller="Order" asp-action="AddToCart" asp-route-id="@item.ItemId">
 													<i class="ti-shopping-cart"></i>
-												</button> <a href="javascript:void(0)" title="Add to Wishlist">
+												</a> <a href="javascript:void(0)" title="Add to Wishlist">
 													<i class="ti-heart" aria-hidden="true"></i>
 												</a> <a href="#"
 											 data-toggle="modal" data-target="#quick-view" title="Quick View">
