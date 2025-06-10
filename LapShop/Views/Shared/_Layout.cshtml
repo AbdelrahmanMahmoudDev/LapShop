@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject SignInManager<ApplicationUser> signInManager
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -916,6 +918,16 @@
                                                 <li><a href="blog(no-sidebar).html">no sidebar</a></li>
                                                 <li><a href="blog-details.html">blog details</a></li>
                                             </ul>
+                                        </li>
+                                        <li>
+                                            @if (!signInManager.IsSignedIn(User))
+                                            {
+                                                <a asp-controller="User" asp-action="Login">Login</a>
+                                            }
+                                            else
+                                            {
+                                                <a asp-controller="User" asp-action="Logout">Logout</a>
+                                            }
                                         </li>
                                     </ul>
                                 </nav>

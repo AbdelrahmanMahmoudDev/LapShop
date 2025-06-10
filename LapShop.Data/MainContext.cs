@@ -1,10 +1,12 @@
 ﻿using LapShop.Domains;
 using LapShop.Domains.Views;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace LapShop.Data
 {
-    public class MainContext : DbContext
+    public class MainContext : IdentityDbContext<ApplicationUser>
     {
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<BusinessInfo> BusinessInfo { get; set; }
@@ -29,6 +31,7 @@ namespace LapShop.Data
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
         {
             base.ConfigureConventions(configurationBuilder);
+
             configurationBuilder.Properties<string>().HaveMaxLength(200);
             configurationBuilder.Properties<decimal>().HaveColumnType("decimal(8, 2)");
             configurationBuilder.Properties<DateTime>().HaveColumnType("DateTime");
@@ -36,6 +39,8 @@ namespace LapShop.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Customer>(e => e.HasKey(a => a.CustomerId));
             modelBuilder.Entity<Supplier>(e => e.HasKey(a => a.SupplierId));
             modelBuilder.Entity<Slider>(e => e.HasKey(a => a.SliderId));

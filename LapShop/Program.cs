@@ -1,8 +1,11 @@
 using LapShop.Services.Category;
+using LapShop.Data;
 using LapShop.Data.Repository;
-using Microsoft.EntityFrameworkCore;
 using LapShop.Services.Item;
 using LapShop.Services.Order;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace LapShop
 {
@@ -18,15 +21,37 @@ namespace LapShop
             {
                 Options.UseSqlServer(builder.Configuration.GetConnectionString("cs"));
             });
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 6;
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+
+                options.User.RequireUniqueEmail = true;
+            }).AddEntityFrameworkStores<Data.MainContext>();
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/User/Login";
+                options.LogoutPath = "/User/Logout";
+                options.AccessDeniedPath = "/User/AccessDenied";
+                options.Cookie.HttpOnly = true;
+                options.Cookie.Name = "LapShopCookie";
+                options.ExpireTimeSpan = TimeSpan.FromDays(30);
+                options.SlidingExpiration = true;
+                options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+            });
+            builder.Services.AddSession();
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.AddDistributedMemoryCache();
 
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<IItemService, ItemService>();
             builder.Services.AddScoped<IOrderService, OrderService>();
 
-            builder.Services.AddSession();
-            builder.Services.AddHttpContextAccessor();
-            builder.Services.AddDistributedMemoryCache();
             var app = builder.Build();
             Utilities.FileUtility.WebRootPath = app.Environment.WebRootPath;
             // Configure the HTTP request pipeline.
@@ -36,6 +61,7 @@ namespace LapShop
             }
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();
 
