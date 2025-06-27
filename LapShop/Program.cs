@@ -46,6 +46,15 @@ namespace LapShop
             builder.Services.AddSession();
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddDistributedMemoryCache();
+            builder.Services.AddSwaggerGen(opt =>
+            {                 
+                opt.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Title = "LapShop API",
+                    Version = "v1",
+                    Description = "API to access items"
+                });
+            });
 
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
@@ -63,7 +72,15 @@ namespace LapShop
 
             app.UseAuthentication();
             app.UseAuthorization();
+
             app.UseSession();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(opt =>
+            {
+                opt.SwaggerEndpoint("/swagger/v1/swagger.json", "LapShop API V1");
+                opt.RoutePrefix = "api-docs"; // Set the route prefix for Swagger UI
+            });
 
             app.MapStaticAssets();
 
