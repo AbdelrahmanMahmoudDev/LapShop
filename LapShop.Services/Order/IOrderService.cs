@@ -9,6 +9,7 @@ namespace LapShop.Services.Order
 {
     public interface IOrderService
     {
+        public void UpdateCart(ShoppingCartVM cart);
         public Task<ShoppingCartVM> GetCart();
         public void AddCart(int itemId);
     }

@@ -42,20 +42,14 @@
                         @foreach(var item in Model.Items)
                         {
                             <tbody>
-                            <tr>
+                                <tr data-item-id="@item.ItemId">
                                 <td>
                                     <a href="#"><img src="@item.ItemImageUrl" alt=""></a>
                                 </td>
                                 <td>
-                                    <a href="#">cotton shirt</a>
+                                    <a href="#">@item.ItemName</a>
                                     <div class="mobile-cart-content row">
                                         <div class="col-xs-3">
-                                            <div class="qty-box">
-                                                <div class="input-group">
-                                                    <input type="text" name="quantity" class="form-control input-number"
-                                                           value="1">
-                                                </div>
-                                            </div>
                                         </div>
                                         <div class="col-xs-3">
                                             <h2 class="td-color">$@item.ItemPrice</h2>
@@ -73,14 +67,14 @@
                                 <td>
                                     <div class="qty-box">
                                         <div class="input-group">
-                                            <input type="number" name="quantity" class="form-control input-number"
+                                                <input type="number" onchange="updateItemCount(@item.ItemId, this.value, @item.TotalPrice, @item.ItemPrice)" name="quantity" class="form-control input-number"
                                                    value="@item.Quantity">
                                         </div>
                                     </div>
                                 </td>
                                 <td><a href="#" class="icon"><i class="ti-close"></i></a></td>
                                 <td>
-                                    <h2 class="td-color">$@item.TotalPrice</h2>
+                                        <h2 id="total-price-@item.ItemId" class="td-color">$@item.TotalPrice</h2>
                                 </td>
                             </tr>
                         </tbody>
@@ -92,7 +86,7 @@
                         <tr>
                             <td>total price :</td>
                             <td>
-                                <h2>@Model.TotalPrice</h2>
+                                <h2 id="cart-total-price">@Model.TotalPrice</h2>
                             </td>
                         </tr>
                     </tfoot>
@@ -106,3 +100,39 @@
     </div>
 </section>
 <!--section end-->
+
+    <script>
+	    function updateItemCount(itemId, newQuantity, currentTotalPrice, currentItemPrice) {
+
+            newQuantityNum = parseInt(newQuantity)
+		    currentTotalPriceNum = parseFloat(currentTotalPrice)
+            currentItemPriceNum = parseFloat(currentItemPrice)
+
+            if (newQuantityNum < 1) {
+                newQuantityNum = 1;
+	        }
+
+            currentTotalPriceNum = newQuantityNum * currentItemPriceNum;
+
+        $.ajax({
+        url: '@Url.Action("ChangeQuantity", "Order")',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            ItemId: parseInt(itemId),
+            ItemCount: parseInt(newQuantityNum),
+            ItemTotalPrice: parseFloat(currentTotalPriceNum)
+        }),
+        success: function (data) {
+			console.log("Success:", data);
+            console.log(data.items.find(i => i.itemId === itemId))
+            $('#total-price-' + itemId).text('$' + data.items.find(i => i.itemId === itemId).totalPrice.toFixed(2));
+            $('#cart-total-price').text('$' + data.totalPrice.toFixed(2));
+        },
+        error: function (xhr, status, error) {
+            console.error("Error:", status, error, xhr.responseText);
+        }
+    });
+
+        }
+</script>

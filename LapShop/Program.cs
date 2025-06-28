@@ -33,7 +33,7 @@ namespace LapShop
                 options.Password.RequireUppercase = false;
 
                 options.User.RequireUniqueEmail = true;
-            }).AddEntityFrameworkStores<Data.MainContext>();
+            }).AddEntityFrameworkStores<MainContext>();
             builder.Services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = "/User/Login";

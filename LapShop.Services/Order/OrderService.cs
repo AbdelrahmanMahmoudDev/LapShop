@@ -23,7 +23,7 @@ namespace LapShop.Services.Order
 
         public Task<ShoppingCartVM> GetCart()
         {
-            ShoppingCartVM cart;
+            ShoppingCartVM? cart;
             var session = _httpContextAccessor.HttpContext?.Request.Cookies["Cart"];
 
             if (session != null)
@@ -35,7 +35,16 @@ namespace LapShop.Services.Order
                 cart = new ShoppingCartVM();
             }
 
-            return Task.FromResult(cart);
+            return Task.FromResult(cart!);
+        }
+
+        public void UpdateCart(ShoppingCartVM cart)
+        {
+            var session = JsonConvert.SerializeObject(cart);
+            _httpContextAccessor.HttpContext?.Response.Cookies.Append("Cart", session, new CookieOptions
+            {
+                Expires = DateTimeOffset.UtcNow.AddDays(30)
+            });
         }
 
         public void AddCart(int itemId)
@@ -46,7 +55,7 @@ namespace LapShop.Services.Order
             {
                 var targetItem = _itemService.GetSingle(itemId);
 
-                ShoppingCartItemVM cartItem = cart.Items
+                ShoppingCartItemVM? cartItem = cart.Items
                                          .AsQueryable()
                                          .Where(i => i.ItemId == itemId)
                                          .FirstOrDefault();
@@ -72,7 +81,7 @@ namespace LapShop.Services.Order
                 var session = JsonConvert.SerializeObject(cart);
                 _httpContextAccessor.HttpContext?.Response.Cookies.Append("Cart", session, new CookieOptions
                 {
-                    Expires = DateTimeOffset.UtcNow.AddDays(30) // Set cookie expiration to 30 days
+                    Expires = DateTimeOffset.UtcNow.AddDays(30)
                 });
             }
             catch(Exception e)
