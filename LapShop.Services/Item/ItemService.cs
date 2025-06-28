@@ -215,29 +215,24 @@ namespace LapShop.Services.Item
             _MainContext.Items.Remove(item);
             await _MainContext.SaveChangesAsync();
         }
-        public HomepageVM PrepareHomepage(HomepageVM homepageVM = null)
+        public async Task<HomepageVM> PrepareHomepage(HomepageVM homepageVM = null)
         {
             if(homepageVM == null)
             {
                 homepageVM = new HomepageVM();
             }
 
-            homepageVM.TopCollections = _MainContext.Items
-                .OrderByDescending(i => i.SalesPrice)
-                .Take(5)
-                .ToList();
-            homepageVM.NewProducts = _MainContext.Items
-                .OrderByDescending(i => i.SalesPrice)
-                .Take(5)
-                .ToList();
-            homepageVM.FeaturedProducts = _MainContext.Items
-                .OrderByDescending(i => i.SalesPrice)
-                .Take(5)
-                .ToList();
-            homepageVM.BestSellers = _MainContext.Items
-                .OrderByDescending(i => i.SalesPrice)
-                .Take(5)
-                .ToList();
+            var products = await _MainContext.Items
+                .Include(i => i.Category)
+                .Include(i => i.ItemType)
+                .Include(i => i.OperatingSystem)
+                .Take(10)
+                .ToListAsync();
+
+            homepageVM.TopCollections = products;
+            homepageVM.NewProducts = products;
+            homepageVM.FeaturedProducts = products;
+            homepageVM.BestSellers = products;
 
             return homepageVM;
         }

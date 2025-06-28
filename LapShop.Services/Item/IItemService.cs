@@ -8,6 +8,6 @@ namespace LapShop.Services.Item
         public VwItemsVM GetSingle(int? id);
         public Task Save(VwItemsVM itemVM);
         public Task Delete(int id);
-        public HomepageVM PrepareHomepage(HomepageVM homepageVM = null);
+        public Task<HomepageVM> PrepareHomepage(HomepageVM homepageVM = null);
     }
 }

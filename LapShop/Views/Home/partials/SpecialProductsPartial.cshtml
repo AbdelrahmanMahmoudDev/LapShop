@@ -23,29 +23,24 @@
 									<div class="product-box">
 										<div class="img-wrapper">
 											<div class="front">
-												<a asp-controller="Item" asp-action="Item" asp-route-id="@item.ItemId">
-													<img src="@item.ImageName"
-														 class="img-fluid blur-up lazyload bg-img" alt="">
-												</a>
+												<div class="card">
+													<a asp-controller="Item" asp-action="Item" asp-route-id="@item.ItemId">
+														<img src="@item.ImageName"
+															 class="card-img-top h-100" alt="">
+													</a>
+												</div>
 											</div>
 											<div class="back">
-												<a asp-controller="Item" asp-action="Item" asp-route-id="@item.ItemId">
-													<img src="@item.ImageName"
-														 class="img-fluid blur-up lazyload bg-img" alt="">
-												</a>
+												<div class="card">
+													<a asp-controller="Item" asp-action="Item" asp-route-id="@item.ItemId">
+														<img src="@item.ImageName"
+															 class="card-img-top h-100" alt="">
+													</a>
+												</div>
 											</div>
 											<div class="cart-info cart-wrap">
-												<button data-toggle="modal" data-target="#addtocart"
-														title="Add to cart">
+												<a asp-controller="Order" asp-action="AddToCart" asp-route-id="@item.ItemId">
 													<i class="ti-shopping-cart"></i>
-												</button> <a href="javascript:void(0)" title="Add to Wishlist">
-													<i class="ti-heart" aria-hidden="true"></i>
-												</a> <a href="#"
-											 data-toggle="modal" data-target="#quick-view" title="Quick View">
-													<i class="ti-search" aria-hidden="true"></i>
-												</a> <a href="compare.html" title="Compare">
-													<i class="ti-reload"
-													   aria-hidden="true"></i>
 												</a>
 											</div>
 										</div>
@@ -69,29 +64,24 @@
 									<div class="product-box">
 										<div class="img-wrapper">
 											<div class="front">
-												<a asp-controller="Item" asp-action="Item" asp-route-id="@item.ItemId">
-													<img src="@item.ImageName"
-														 class="img-fluid blur-up lazyload bg-img" alt="">
-												</a>
+												<div class="card">
+													<a asp-controller="Item" asp-action="Item" asp-route-id="@item.ItemId">
+														<img src="@item.ImageName"
+															 class="card-img-bottom h-100" alt="">
+													</a>
+												</div>
 											</div>
 											<div class="back">
-												<a asp-controller="Item" asp-action="Item" asp-route-id="@item.ItemId">
-													<img src="@item.ImageName"
-														 class="img-fluid blur-up lazyload bg-img" alt="">
-												</a>
+												<div class="card">
+													<a asp-controller="Item" asp-action="Item" asp-route-id="@item.ItemId">
+														<img src="@item.ImageName"
+															 class="card-img-bottom h-100" alt="">
+													</a>
+												</div>
 											</div>
 											<div class="cart-info cart-wrap">
-												<button data-toggle="modal" data-target="#addtocart"
-														title="Add to cart">
+												<a asp-controller="Order" asp-action="AddToCart" asp-route-id="@item.ItemId">
 													<i class="ti-shopping-cart"></i>
-												</button> <a href="javascript:void(0)" title="Add to Wishlist">
-													<i class="ti-heart" aria-hidden="true"></i>
-												</a> <a href="#"
-											 data-toggle="modal" data-target="#quick-view" title="Quick View">
-													<i class="ti-search" aria-hidden="true"></i>
-												</a> <a href="compare.html" title="Compare">
-													<i class="ti-reload"
-													   aria-hidden="true"></i>
 												</a>
 											</div>
 										</div>
@@ -116,28 +106,24 @@
 									<div class="product-box">
 										<div class="img-wrapper">
 											<div class="front">
-												<a asp-controller="Item" asp-action="Item" asp-route-id="@item.ItemId">
-													<img src="@item.ImageName"
-														 class="img-fluid blur-up lazyload bg-img" alt="">
-												</a>
+												<div class="card">
+													<a asp-controller="Item" asp-action="Item" asp-route-id="@item.ItemId">
+														<img src="@item.ImageName"
+															 class="card-img-bottom h-100" alt="">
+													</a>
+												</div>
 											</div>
 											<div class="back">
-												<a asp-controller="Item" asp-action="Item" asp-route-id="@item.ItemId">
-													<img src="@item.ImageName"
-														 class="img-fluid blur-up lazyload bg-img" alt="">
-												</a>
+												<div class="card">
+													<a asp-controller="Item" asp-action="Item" asp-route-id="@item.ItemId">
+														<img src="@item.ImageName"
+															 class="card-img-bottom h-100" alt="">
+													</a>
+												</div>
 											</div>
 											<div class="cart-info cart-wrap">
 												<a asp-controller="Order" asp-action="AddToCart" asp-route-id="@item.ItemId">
 													<i class="ti-shopping-cart"></i>
-												</a> <a href="javascript:void(0)" title="Add to Wishlist">
-													<i class="ti-heart" aria-hidden="true"></i>
-												</a> <a href="#"
-											 data-toggle="modal" data-target="#quick-view" title="Quick View">
-													<i class="ti-search" aria-hidden="true"></i>
-												</a> <a href="compare.html" title="Compare">
-													<i class="ti-reload"
-													   aria-hidden="true"></i>
 												</a>
 											</div>
 										</div>

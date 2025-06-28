@@ -32,7 +32,8 @@ namespace LapShop
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
 
-                options.User.RequireUniqueEmail = true;
+                options.User.RequireUniqueEmail = false;
+                options.SignIn.RequireConfirmedEmail = false;
             }).AddEntityFrameworkStores<MainContext>();
             builder.Services.ConfigureApplicationCookie(options =>
             {

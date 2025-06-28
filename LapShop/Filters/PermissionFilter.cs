@@ -13,37 +13,28 @@ namespace LapShop.Filters
             _permissionsService = permissionsService;
         }
 
-        public override Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
-        {
-            return base.OnActionExecutionAsync(context, next);
-        }
-
-        public override void OnActionExecuting(ActionExecutingContext context)
+        public override async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             var controller = context.Controller as Controller;
-            var actionName = context.ActionDescriptor?.DisplayName?.Split('.').Last();
+            var actionName = context.ActionDescriptor?.DisplayName?.Split('.').Last().Split(' ').First();
             var controllerName = controller?.GetType().Name;
             var areaName = controller?.RouteData.Values["area"]?.ToString() ?? "Root";
 
             var currentUserId = context.HttpContext.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (string.IsNullOrEmpty(currentUserId))
             {
-                if(!areaName.Equals("Root", StringComparison.OrdinalIgnoreCase))
+                if (!areaName.Equals("Root", StringComparison.OrdinalIgnoreCase))
                     context.Result = new RedirectToActionResult("Login", "User", new { area = "" });
-
-                return;
             }
 
-            var queryResult = _permissionsService.GetPermissionByAction(currentUserId, areaName, controllerName!, actionName!);
+            var queryResult = await _permissionsService.GetPermissionByAction(currentUserId, areaName, controllerName!, actionName!);
 
-            if(queryResult == null)
+            if (queryResult == null)
             {
-                if(!areaName.Equals("Root", StringComparison.OrdinalIgnoreCase))
+                if (!areaName.Equals("Root", StringComparison.OrdinalIgnoreCase))
                     context.Result = new RedirectToActionResult("AccessDenied", "User", new { area = "" });
-                return;
             }
-
-            base.OnActionExecuting(context);
+            await next.Invoke();
         }
     }
 }

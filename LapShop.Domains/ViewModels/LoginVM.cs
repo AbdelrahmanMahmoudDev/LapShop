@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace LapShop.Domains.ViewModels
 {
@@ -15,6 +16,7 @@ namespace LapShop.Domains.ViewModels
         [Required(ErrorMessage = "This field is required")]
         [MinLength(6, ErrorMessage = "Password must be at least 6 characters long")]
         public string Password { get; set; } = null!;
+        [ValidateNever]
         public string ReturnUrl { get; set; } = string.Empty;
     }
 }

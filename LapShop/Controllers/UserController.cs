@@ -3,6 +3,7 @@ using LapShop.Domains.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 
 namespace LapShop.Controllers
 {
@@ -25,6 +26,28 @@ namespace LapShop.Controllers
         public IActionResult Login()
         {
             return View(new LoginVM());
+        }
+
+        public async Task<IActionResult> SaveLogin(LoginVM loginVM)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View("Login", loginVM);
+            }
+
+            var user = await _userManager.FindByEmailAsync(loginVM.Email);
+
+            var signInResult = await _signInManager.PasswordSignInAsync(user.UserName, loginVM.Password, isPersistent: false, lockoutOnFailure: false);
+            if(!signInResult.Succeeded)
+            {
+                ModelState.AddModelError(string.Empty, "Login failed. Please check your credentials.");
+                return View("Login", loginVM);
+            }
+            if (!string.IsNullOrEmpty(loginVM.ReturnUrl))
+            {
+                return Redirect(loginVM.ReturnUrl);
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         [Authorize]
@@ -70,14 +93,14 @@ namespace LapShop.Controllers
                 return View("Register", authVM);
             }
 
-            var signInResult = await _signInManager.PasswordSignInAsync(authVM.Email, authVM.Password, isPersistent: false, lockoutOnFailure: false);
+            var signInResult = await _signInManager.PasswordSignInAsync(authVM.FirstName, authVM.Password, isPersistent: false, lockoutOnFailure: false);
 
             if(!signInResult.Succeeded)
             {
                 ModelState.AddModelError(string.Empty, "Login failed. Please check your credentials.");
-                return View("Register", authVM); // TODO: Change to login
+                return View("Login", new LoginVM { Email = authVM.Email });
             }
-            if (authVM.ReturnUrl != string.Empty)
+            if (!string.IsNullOrEmpty(authVM.ReturnUrl))
             {
                 return Redirect(authVM.ReturnUrl);
             }

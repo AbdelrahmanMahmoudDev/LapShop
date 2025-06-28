@@ -14,9 +14,9 @@ namespace LapShop.Controllers
             _itemService = itemService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var list = _itemService.PrepareHomepage();
+            var list = await _itemService.PrepareHomepage();
             return View(list);
         }
     }
