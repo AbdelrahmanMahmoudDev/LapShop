@@ -61,5 +61,19 @@ namespace LapShop.Controllers
                 return StatusCode(500, "An error occurred while changing the quantity: " + ex.Message);
             }
         }
+
+        [HttpPost]
+        public IActionResult SaveOrder(ShoppingCartVM cart)
+        {
+            try
+            {
+                _orderService.UpdateCart(cart);
+                return Ok("Order saved successfully.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "An error occurred while saving the order: " + ex.Message);
+            }
+        }
     }
 }
