@@ -26,6 +26,7 @@ namespace LapShop.Data
         public virtual DbSet<SalesInvoicexItem> SalesInvoicexItems { get; set; }
         public virtual DbSet<Slider> Sliders { get; set; }
         public virtual DbSet<VwItems> VwItems { get; set; }
+        public virtual DbSet<UserPermissions> UserPermissions { get; set; }
         public MainContext() : base() { }
         public MainContext(DbContextOptions<MainContext> Options) : base(Options) { }
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
@@ -45,6 +46,7 @@ namespace LapShop.Data
             modelBuilder.Entity<Supplier>(e => e.HasKey(a => a.SupplierId));
             modelBuilder.Entity<Slider>(e => e.HasKey(a => a.SliderId));
             modelBuilder.Entity<DeliveryMan>(e => e.HasKey(a => a.DeliveryManId));
+            modelBuilder.Entity<UserPermissions>(e => e.HasKey(a => a.UserPermissionsId));
 
             modelBuilder.Entity<Category>(e =>
             {

@@ -1,11 +1,13 @@
-using LapShop.Services.Category;
 using LapShop.Data;
 using LapShop.Data.Repository;
+using LapShop.Filters;
+using LapShop.Services.Category;
 using LapShop.Services.Item;
 using LapShop.Services.Order;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
+using LapShop.Services.Permissions;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace LapShop
 {
@@ -16,8 +18,8 @@ namespace LapShop
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddControllersWithViews();
-            builder.Services.AddDbContext<Data.MainContext>(Options =>
+            builder.Services.AddControllersWithViews(options => { options.Filters.Add<PermissionFilter>(); });
+            builder.Services.AddDbContext<MainContext>(Options =>
             {
                 Options.UseSqlServer(builder.Configuration.GetConnectionString("cs"));
             });
@@ -60,6 +62,7 @@ namespace LapShop
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<IItemService, ItemService>();
             builder.Services.AddScoped<IOrderService, OrderService>();
+            builder.Services.AddScoped<IPermissionsService, PermissionsService>();
 
             var app = builder.Build();
             Utilities.FileUtility.WebRootPath = app.Environment.WebRootPath;
