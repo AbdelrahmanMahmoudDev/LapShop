@@ -5,6 +5,7 @@ using LapShop.Services.Category;
 using LapShop.Services.Item;
 using LapShop.Services.Order;
 using LapShop.Services.Permissions;
+using LapShop.Services.Slider;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -64,6 +65,7 @@ namespace LapShop
             builder.Services.AddScoped<IItemService, ItemService>();
             builder.Services.AddScoped<IOrderService, OrderService>();
             builder.Services.AddScoped<IPermissionsService, PermissionsService>();
+            builder.Services.AddScoped<ISliderService, SliderService>();
 
             var app = builder.Build();
             Utilities.FileUtility.WebRootPath = app.Environment.WebRootPath;

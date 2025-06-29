@@ -233,6 +233,7 @@ namespace LapShop.Services.Item
             homepageVM.NewProducts = products;
             homepageVM.FeaturedProducts = products;
             homepageVM.BestSellers = products;
+            homepageVM.Sliders = await _MainContext.Sliders.ToListAsync();
 
             return homepageVM;
         }
