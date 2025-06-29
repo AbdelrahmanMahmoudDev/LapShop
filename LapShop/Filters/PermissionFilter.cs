@@ -16,25 +16,31 @@ namespace LapShop.Filters
         public override async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             var controller = context.Controller as Controller;
-            var actionName = context.ActionDescriptor?.DisplayName?.Split('.').Last().Split(' ').First();
             var controllerName = controller?.GetType().Name;
+            var actionName = context.ActionDescriptor?.DisplayName?.Split('.').Last().Split(' ').First();
             var areaName = controller?.RouteData.Values["area"]?.ToString() ?? "Root";
+
+            if (areaName == "Root")
+            {
+                await next.Invoke();
+                return;
+            }
 
             var currentUserId = context.HttpContext.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (string.IsNullOrEmpty(currentUserId))
             {
-                if (!areaName.Equals("Root", StringComparison.OrdinalIgnoreCase))
-                    context.Result = new RedirectToActionResult("Login", "User", new { area = "" });
+                context.Result = new RedirectToActionResult("Login", "User", new { area = "" });
+                return;
             }
 
             var queryResult = await _permissionsService.GetPermissionByAction(currentUserId, areaName, controllerName!, actionName!);
 
             if (queryResult == null)
             {
-                if (!areaName.Equals("Root", StringComparison.OrdinalIgnoreCase))
-                    context.Result = new RedirectToActionResult("AccessDenied", "User", new { area = "" });
+                context.Result = new RedirectToActionResult("AccessDenied", "User", new { area = "" });
+                return;
             }
-            await next.Invoke();
+           await next.Invoke();
         }
     }
 }
