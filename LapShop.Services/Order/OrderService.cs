@@ -47,7 +47,7 @@ namespace LapShop.Services.Order
             });
         }
 
-        public void AddCart(int itemId)
+        public void AddCart(int itemId, int? quantity = null)
         {
             var cart = GetCart().Result;
 
@@ -62,7 +62,14 @@ namespace LapShop.Services.Order
                 
                 if(cartItem != null)
                 {
-                    cartItem.Quantity++;
+                    if(quantity.HasValue && quantity.Value > 0)
+                    {
+                        cartItem.Quantity += quantity.Value;
+                    }
+                    else
+                    {
+                        cartItem.Quantity++;
+                    }
                     cartItem.TotalPrice = cartItem.Quantity * cartItem.ItemPrice;
                 }
                 else

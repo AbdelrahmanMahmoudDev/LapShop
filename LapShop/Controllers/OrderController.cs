@@ -24,11 +24,11 @@ namespace LapShop.Controllers
             return View(await _orderService.GetCart());
         }
 
-        public IActionResult AddToCart(int id)
+        public IActionResult AddToCart(int id, int? quantity = null)
         {
             try
             {
-                _orderService.AddCart(id);
+                _orderService.AddCart(id, quantity);
                 return RedirectToAction("Cart");
             }
             catch (Exception ex)

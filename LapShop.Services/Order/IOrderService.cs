@@ -11,6 +11,6 @@ namespace LapShop.Services.Order
     {
         public void UpdateCart(ShoppingCartVM cart);
         public Task<ShoppingCartVM> GetCart();
-        public void AddCart(int itemId);
+        public void AddCart(int itemId, int? quantity = null);
     }
 }
