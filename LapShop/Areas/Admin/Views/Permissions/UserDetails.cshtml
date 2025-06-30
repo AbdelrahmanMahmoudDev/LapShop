@@ -15,7 +15,14 @@
 						var targetArea = string.IsNullOrEmpty(area.Area) ? "Root" : area.Area;
 						var value = $"{Model.UserId}|{targetArea}|{controller.Controller}|{controller.TechnicalData[i].Action}";
 						<li>
-							<input name="SelectedActions" value= "@value" type="checkbox" />
+							@if (controller.TechnicalData[i].IsSelected)
+							{
+								<input name="SelectedActions" value="@value" type="checkbox" checked />
+							}
+							else
+							{
+								<input name="SelectedActions" value= "@value" type="checkbox" />
+							}
 							<label for="SelectedActions">@controller.TechnicalData[i].Action</label>
 						</li>
 					}

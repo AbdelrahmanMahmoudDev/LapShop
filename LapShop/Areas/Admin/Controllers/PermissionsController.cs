@@ -24,7 +24,7 @@ namespace LapShop.Areas.Admin.Controllers
             return View(_userManager.Users.ToList());
         }
 
-        public IActionResult UserDetails(string userId)
+        public async Task<IActionResult> UserDetails(string userId)
         {
             var asm = Assembly.GetAssembly(typeof(Program));
             var controllerActionGroups = asm?.GetTypes()
@@ -61,6 +61,25 @@ namespace LapShop.Areas.Admin.Controllers
                 UserId = userId,
                 AreaGroups = controllerActionGroups,
             };
+
+
+            List<Domains.UserPermissions> userPermissions = await _permissionsService.GetPermissionsByUser(userId);
+
+            foreach (var areaGroup in userDetails.AreaGroups)
+            {
+                foreach (var controllerGroup in areaGroup.Controllers)
+                {
+                    foreach (var action in controllerGroup.TechnicalData)
+                    {
+                        var permission = userPermissions.FirstOrDefault(up => up.Area == areaGroup.Area && up.Controller == controllerGroup.Controller && up.Action == action.Action);
+                        if (permission != null)
+                        {
+                            action.IsSelected = true;
+                            areaGroup.SelectedActions.Add($"{userId}|{areaGroup.Area}|{controllerGroup.Controller}|{action.Action}");
+                        }
+                    }
+                }
+            }
 
             return View(userDetails);
         }

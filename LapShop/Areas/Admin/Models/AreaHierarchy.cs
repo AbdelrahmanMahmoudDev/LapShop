@@ -1,17 +1,5 @@
 ﻿namespace LapShop.Areas.Admin.Models
 {
-    public class SelectedAction
-    {
-        public SelectedAction()
-        {
-            Area = "";
-            Controller = "";
-            Action = "";
-        }
-        public string Area { get; set; }
-        public string Controller { get; set; }
-        public string Action { get; set; }
-    }
     public class UserDetailsVM
     {
         public string UserId { get; set; } = null!;
@@ -26,12 +14,14 @@
             Action = "";
             ReturnType = "";
             Attributes = "";
+            IsSelected = false;
         }
         public string Area { get; set; }
         public string Controller { get; set; }
         public string Action { get; set; }
         public string ReturnType { get; set; }
         public string Attributes { get; set; }
+        public bool IsSelected { get; set; }
     }
     public class AreaGroup
     {
