@@ -51,9 +51,7 @@ namespace LapShop.Controllers
                     cartItem.TotalPrice = quantityDTO.ItemTotalPrice;
                     cart.TotalPrice = cart.Items.Sum(i => i.TotalPrice);
                 }
-                // Update the cart in the session or database as needed
                 _orderService.UpdateCart(cart);
-                // For example, you might want to serialize and save it back to the session
                 return Ok(cart);
             }
             catch (Exception ex)
@@ -73,6 +71,28 @@ namespace LapShop.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, "An error occurred while saving the order: " + ex.Message);
+            }
+        }
+
+
+        public async Task<IActionResult> DeleteCartItem(int id)
+        {
+            try
+            {
+                var cart = await _orderService.GetCart();
+                var cartItem = cart.Items.FirstOrDefault(i => i.ItemId == id);
+                
+                if (cartItem != null)
+                {
+                    cart.Items.Remove(cartItem);
+                    cart.TotalPrice = cart.Items.Sum(i => i.TotalPrice);
+                    _orderService.UpdateCart(cart);
+                }
+                return RedirectToAction("Cart");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "An error occurred while deleting the item from the cart: " + ex.Message);
             }
         }
     }

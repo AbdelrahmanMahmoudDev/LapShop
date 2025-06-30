@@ -72,7 +72,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td><a href="#" class="icon"><i class="ti-close"></i></a></td>
+                                    <td><a asp-controller="Order" asp-action="DeleteCartItem" asp-route-id="@item.ItemId" class="icon"><i class="ti-close"></i></a></td>
                                 <td>
                                         <h2 id="total-price-@item.ItemId" class="td-color">$@item.TotalPrice</h2>
                                 </td>
